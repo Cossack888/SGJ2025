@@ -200,8 +200,8 @@ Transform:
   m_GameObject: {fileID: 6480215790027121576}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.08, y: -0.08, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -6.7555866, y: -0.5771313, z: 0}
+  m_LocalScale: {x: 0.054245, y: 0.054245, z: 0.054245}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2143930801845324177}
@@ -271,8 +271,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.007879138, y: -0.1930387}
-  m_Size: {x: 0.8151653, y: 1.3860774}
+  m_Offset: {x: 0.53342915, y: 13.880971}
+  m_Size: {x: 11.857847, y: 29.534094}
   m_Direction: 0
 --- !u!114 &3719407126415342550
 MonoBehaviour:
@@ -411,7 +411,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  groundCheckDistance: 0.2
+  groundCheckDistance: 0.4
   bananaPrefab: {fileID: 5256929267212986047, guid: 2c2cf4574ac562d4cb0112709f5279ca, type: 3}
   throwPoint: {fileID: 3519846602365201444}
   throwForce: 10
@@ -527,7 +527,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 72de0c64f2c6a498096698322c976a67, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8279a01ae5d574f4898e5a36bbeca1aa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

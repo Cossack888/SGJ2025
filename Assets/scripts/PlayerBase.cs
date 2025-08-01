@@ -21,6 +21,7 @@ public abstract class MonkeyControllerBase : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         inputHandler = GetComponent<PlayerInputHandler>();
+
     }
 
     protected virtual void Update()

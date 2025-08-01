@@ -66,13 +66,19 @@ public class SmallMonkeyController : MonkeyControllerBase
 
     private void ShowTrajectory(Vector2 direction)
     {
-        if (bananaPrefab == null || trajectoryRenderer == null) return;
+        if (bananaPrefab == null || trajectoryRenderer == null || throwPoint == null)
+            return;
 
+        trajectoryRenderer.useWorldSpace = true;
         trajectoryRenderer.positionCount = trajectoryPoints;
 
         Vector3[] points = new Vector3[trajectoryPoints];
         Vector3 startPos = throwPoint.position;
+        Debug.DrawRay(startPos, Vector3.up * 0.5f, Color.red);
+        Debug.Log("ThrowPoint World Position: " + startPos);
+
         Vector2 velocity = direction.normalized * throwForce;
+
         float bananaGravityScale = 1f;
         Rigidbody2D bananaRb = bananaPrefab.GetComponent<Rigidbody2D>();
         if (bananaRb != null)

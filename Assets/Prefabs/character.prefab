@@ -413,7 +413,7 @@ MonoBehaviour:
     m_Bits: 8
   groundCheckDistance: 0.2
   bananaPrefab: {fileID: 5256929267212986047, guid: 2c2cf4574ac562d4cb0112709f5279ca, type: 3}
-  throwPoint: {fileID: 7400652485901618394}
+  throwPoint: {fileID: 3519846602365201444}
   throwForce: 10
   throwCooldown: 0.5
   trajectoryRenderer: {fileID: 3002604304540521208}

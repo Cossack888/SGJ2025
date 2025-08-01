@@ -1,65 +1,70 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
-public class PlayerMovement : MonoBehaviour
+[RequireComponent(typeof(Rigidbody2D))]
+public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    public float jumpForce = 5f;
-    public float groundCheckDistance = 0.1f;
+    public float walkSpeed = 5f;
+    public float runSpeed = 8f;
+    public float jumpForce = 12f;
+    public Transform groundCheck;
     public LayerMask groundLayer;
+    public float groundCheckDistance = 0.3f;
 
-    private Rigidbody _rb;
-    private PlayerInputHandler _input;
-    public bool _isGrounded;
+    private Rigidbody2D rb;
+    private PlayerInputHandler input;
+    public bool isGrounded;
 
-    private Vector2 _moveInput;
-    private bool _jumpRequested;
+    private bool facingRight = true;
 
-    private void Start()
+    void Start()
     {
-        _rb = GetComponent<Rigidbody>();
-        _input = FindFirstObjectByType<PlayerInputHandler>();
+        rb = GetComponent<Rigidbody2D>();
+        input = GetComponent<PlayerInputHandler>();
     }
 
-    private void Update()
+    void Update()
     {
-        _moveInput = _input.MoveInput;
-
-        if (_input.IsJumping && _isGrounded)
+        // Obracanie postaci
+        if (input.MoveInput.x > 0 && !facingRight)
         {
-            _jumpRequested = true;
+            Flip();
+        }
+        else if (input.MoveInput.x < 0 && facingRight)
+        {
+            Flip();
         }
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
-        CheckGrounded();
 
-        // Movement
-        Vector3 move = new Vector3(_moveInput.x, 0, _moveInput.y);
-        move = transform.TransformDirection(move) * moveSpeed;
-        Vector3 newVelocity = new Vector3(move.x, _rb.linearVelocity.y, move.z);
-        _rb.linearVelocity = newVelocity;
+        RaycastHit2D hit = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, groundLayer);
+        isGrounded = hit.collider != null;
+        float move = input.MoveInput.x;
+        float speed = input.IsSprinting ? runSpeed : walkSpeed;
 
-        // Jump
-        if (_jumpRequested)
+        rb.linearVelocity = new Vector2(move * speed, rb.linearVelocity.y);
+
+        if (input.IsJumping && isGrounded)
         {
-            _rb.linearVelocity = new Vector3(_rb.linearVelocity.x, 0f, _rb.linearVelocity.z); // Reset Y before jump
-            _rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            _jumpRequested = false;
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
     }
 
-    private void CheckGrounded()
+    private void Flip()
     {
-        _isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance + 0.1f, groundLayer);
+        facingRight = !facingRight;
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
     }
 
-#if UNITY_EDITOR
-    private void OnDrawGizmosSelected()
+    void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * (groundCheckDistance + 0.1f));
+        if (groundCheck != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(groundCheck.position, groundCheck.position + Vector3.down * groundCheckDistance);
+        }
     }
-#endif
 }

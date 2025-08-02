@@ -12,6 +12,8 @@ public class EnemyScript : MonoBehaviour
 
     [SerializeField] private GameObject dart;
     [SerializeField] private GameObject net;
+    [SerializeField] private float netForce;
+    [SerializeField] private bool netLoaded = false;
     [SerializeField] private GameObject baton;
 
     [SerializeField] private float shootingSpeed;
@@ -77,7 +79,7 @@ public class EnemyScript : MonoBehaviour
                 }
                 BattonAttack();
             }
-            else if (distance < 3)
+            else if (distance < 3 && !netLoaded)
             {
                 if (shooting)
                 {
@@ -90,12 +92,6 @@ public class EnemyScript : MonoBehaviour
                 InvokeRepeating("Shooting", 0.5f, shootingSpeed);
                 shooting = true;
             }
-
-            if (players != null)
-            {
-                Debug.Log("Player is targeted " + player.position.x);
-            }
-
         }
 
         if (Input.GetKeyDown("space"))
@@ -132,7 +128,7 @@ public class EnemyScript : MonoBehaviour
     {
         Debug.Log("Throw the net");
 
-        float angleInDegrees = 45f;
+        float angleInDegrees = 135f;
 
         GameObject spawnedNet = Instantiate(net, transform);
         Rigidbody2D sNet = spawnedNet.GetComponent<Rigidbody2D>();
@@ -140,7 +136,9 @@ public class EnemyScript : MonoBehaviour
 
         Vector2 forceDirection = new Vector2(Mathf.Cos(angleInRadians), Mathf.Sin(angleInRadians));
 
-        sNet.AddForce(forceDirection * 5f, ForceMode2D.Impulse); // needs to be in the direction of the player
+        sNet.AddForce(forceDirection * netForce, ForceMode2D.Impulse); // needs to be in the direction of the player
+
+        netLoaded = false;
     }
 
     private void Shooting()
@@ -181,8 +179,6 @@ public class EnemyScript : MonoBehaviour
                 minDist = dist;
             }
         }
-
-        Debug.Log(tMin.gameObject.name);
         return tMin;
     }
 

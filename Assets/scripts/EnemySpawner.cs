@@ -104,8 +104,6 @@ public class EnemySpawner : MonoBehaviour
                     break;
                 }
 
-                Debug.Log("Enemy activated to move towards " + finalMoveCoord + " from " + numbers.Count);
-
                 enemiesList[i].ActivateEnemy(finalMoveCoord, spawnPoint, enemySpeed);
 
                 numSpawned++;

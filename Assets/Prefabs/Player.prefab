@@ -272,6 +272,7 @@ GameObject:
   - component: {fileID: 3896694734403220571}
   - component: {fileID: 753403935136665781}
   - component: {fileID: 3094617723518365933}
+  - component: {fileID: 7281540961236917926}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -506,6 +507,8 @@ MonoBehaviour:
   airControlMultiplier: 0.5
   isGrounded: 0
   gravityRestoreDelay: 0.1
+  climbSpeed: 30
+  jumpFromLedge: 0
 --- !u!114 &3094617723518365933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -518,7 +521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 243ec0be01760ac46892f26c09bad3ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth: 0
+  playerMaxHealth: 0
   playerCurrentHealth: 0
   playerMaxAmmo: 0
   playerCurrentAmmo: 0
@@ -527,6 +530,28 @@ MonoBehaviour:
   playerRegen: 0
   playerJumpHeight: 0
   playerReload: 0
+--- !u!95 &7281540961236917926
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839685565371406724}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2090705268932627345
 GameObject:
   m_ObjectHideFlags: 0
@@ -616,7 +641,7 @@ Transform:
   m_GameObject: {fileID: 7730204320750937685}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.18, y: 1.81, z: 0}
+  m_LocalPosition: {x: 0.77, y: 1.58, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -670,7 +695,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.4
+  m_Radius: 0.1
 --- !u!1001 &1965461926065977545
 PrefabInstance:
   m_ObjectHideFlags: 0

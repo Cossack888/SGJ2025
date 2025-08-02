@@ -5,21 +5,46 @@ public class SmallMonkeyController : MonkeyControllerBase
     [Header("Banana Throwing")]
     public GameObject bananaPrefab;
     public Transform throwPoint;
-    public float throwForce = 10f;
+    public float minThrowForce = 5f;
+    public float maxThrowForce = 15f;
     public float throwCooldown = 0.5f;
+    public float maxChargeTime = 1.5f;
 
     [Header("Trajectory")]
     public LineRenderer trajectoryRenderer;
     public int trajectoryPoints = 30;
     public float trajectoryTimeStep = 0.1f;
-    public float aimSensitivity = 0.2f;
 
     private float lastThrowTime;
+    private bool isCharging;
+    private float chargeStartTime;
+    private Vector2 lastValidAimDirection = Vector2.right;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        inputHandler.AttackPressed += OnAttackPress;
+        inputHandler.AttackReleased += OnAttackRelease;
+    }
+    private void Start()
+    {
+        lastValidAimDirection = facingRight ? Vector2.right : Vector2.left;
+    }
     protected override void Update()
     {
         base.Update();
-        HandleAiming();
+
+        if (isCharging)
+        {
+            float heldTime = Mathf.Clamp(Time.time - chargeStartTime, 0f, maxChargeTime);
+            float currentForce = Mathf.Lerp(minThrowForce, maxThrowForce, heldTime / maxChargeTime);
+
+            Vector2 look = inputHandler.LookInput;
+            if (look.magnitude > 0.1f)
+                lastValidAimDirection = look.normalized;
+
+            ShowTrajectory(lastValidAimDirection, currentForce);
+        }
     }
 
     protected override void Jump()
@@ -29,42 +54,48 @@ public class SmallMonkeyController : MonkeyControllerBase
 
     protected override void Attack()
     {
+        // Attack is handled by OnAttackPress/Release
+    }
+
+    public void OnAttackPress()
+    {
         if (Time.time - lastThrowTime < throwCooldown)
             return;
 
+        isCharging = true;
+        chargeStartTime = Time.time;
+        trajectoryRenderer.enabled = true;
+
+        Vector2 look = inputHandler.LookInput;
+        if (look.magnitude > 0.1f)
+        {
+            lastValidAimDirection = look.normalized;
+        }
+    }
+
+    public void OnAttackRelease()
+    {
+        if (!isCharging)
+            return;
+
+        isCharging = false;
+        trajectoryRenderer.enabled = false;
+
+        float heldTime = Mathf.Clamp(Time.time - chargeStartTime, 0f, maxChargeTime);
+        float currentForce = Mathf.Lerp(minThrowForce, maxThrowForce, heldTime / maxChargeTime);
+
+        ThrowBanana(currentForce);
+    }
+
+    private void ThrowBanana(float force)
+    {
         lastThrowTime = Time.time;
 
-        Vector2 direction = GetAimDirection();
         GameObject banana = Instantiate(bananaPrefab, throwPoint.position, Quaternion.identity);
-        banana.GetComponent<Rigidbody2D>().linearVelocity = direction.normalized * throwForce;
+        banana.GetComponent<Rigidbody2D>().linearVelocity = lastValidAimDirection * force;
     }
 
-    private void HandleAiming()
-    {
-        Vector2 look = inputHandler.LookInput;
-
-        if (look.magnitude > aimSensitivity)
-        {
-            Vector2 direction = look.normalized;
-            ShowTrajectory(direction);
-        }
-        else
-        {
-            trajectoryRenderer.positionCount = 0;
-        }
-    }
-
-    private Vector2 GetAimDirection()
-    {
-        Vector2 look = inputHandler.LookInput;
-
-        if (look.magnitude > 0.1f)
-            return look.normalized;
-        else
-            return facingRight ? Vector2.right : Vector2.left;
-    }
-
-    private void ShowTrajectory(Vector2 direction)
+    private void ShowTrajectory(Vector2 direction, float customForce)
     {
         if (bananaPrefab == null || trajectoryRenderer == null || throwPoint == null)
             return;
@@ -74,17 +105,10 @@ public class SmallMonkeyController : MonkeyControllerBase
 
         Vector3[] points = new Vector3[trajectoryPoints];
         Vector3 startPos = throwPoint.position;
-        Debug.DrawRay(startPos, Vector3.up * 0.5f, Color.red);
-        Debug.Log("ThrowPoint World Position: " + startPos);
 
-        Vector2 velocity = direction.normalized * throwForce;
-
-        float bananaGravityScale = 1f;
-        Rigidbody2D bananaRb = bananaPrefab.GetComponent<Rigidbody2D>();
-        if (bananaRb != null)
-            bananaGravityScale = bananaRb.gravityScale;
-
-        Vector2 gravity = Physics2D.gravity * bananaGravityScale;
+        float gravityScale = bananaPrefab.GetComponent<Rigidbody2D>()?.gravityScale ?? 1f;
+        Vector2 gravity = Physics2D.gravity * gravityScale;
+        Vector2 velocity = direction.normalized * customForce;
 
         for (int i = 0; i < trajectoryPoints; i++)
         {
@@ -101,3 +125,5 @@ public class SmallMonkeyController : MonkeyControllerBase
         Debug.Log("Use Special Ability");
     }
 }
+
+

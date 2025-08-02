@@ -414,12 +414,13 @@ MonoBehaviour:
   groundCheckDistance: 0.4
   bananaPrefab: {fileID: 5256929267212986047, guid: 2c2cf4574ac562d4cb0112709f5279ca, type: 3}
   throwPoint: {fileID: 3519846602365201444}
-  throwForce: 10
+  minThrowForce: 20
+  maxThrowForce: 50
   throwCooldown: 0.5
+  maxChargeTime: 1.5
   trajectoryRenderer: {fileID: 3002604304540521208}
   trajectoryPoints: 30
   trajectoryTimeStep: 0.1
-  aimSensitivity: 0.2
 --- !u!1 &6672754423083431432
 GameObject:
   m_ObjectHideFlags: 0

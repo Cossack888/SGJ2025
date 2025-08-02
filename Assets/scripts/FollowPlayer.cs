@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     public CameraController cameraController;
-    public Transform[] playerTransforms; // np. [ma³pa du¿a, ma³pa ma³a]
+    public Transform[] playerTransforms;
     private int activePlayerIndex = 0;
 
     private void Start()
@@ -13,7 +13,7 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab)) // Prze³¹cz gracza
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             activePlayerIndex = (activePlayerIndex + 1) % playerTransforms.Length;
             cameraController.SetTarget(playerTransforms[activePlayerIndex]);

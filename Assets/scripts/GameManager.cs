@@ -14,10 +14,13 @@ public class GameManager : MonoBehaviour
     private Gamepad pad2;
 
     private HashSet<InputDevice> usedDevices = new HashSet<InputDevice>();
-
+    private CameraController cam;
+    private void Start()
+    {
+        cam = FindAnyObjectByType<CameraController>();
+    }
     void Update()
     {
-        // Gracz 1 nie przydzielony
         if (!player1Assigned)
         {
             if (Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame && !usedDevices.Contains(Keyboard.current))
@@ -38,7 +41,6 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        // Gracz 1 jest, ale gracz 2 nie
         else if (!player2Assigned)
         {
             if (Gamepad.all.Count > 0)
@@ -58,29 +60,32 @@ public class GameManager : MonoBehaviour
 
     void SpawnPlayer1WithKeyboard()
     {
-        var player1 = Instantiate(largeMonkeyPrefab, new Vector3(-2, 0, 0), Quaternion.identity);
+        var player1 = Instantiate(largeMonkeyPrefab, transform.position + new Vector3(-2, 0, 0), Quaternion.identity);
         var input1 = player1.GetComponent<PlayerInput>();
         input1.SwitchCurrentControlScheme("Keyboard&Mouse", Keyboard.current);
 
         Debug.Log("Gracz 1: Klawiatura");
         player1Assigned = true;
         pad1 = null;
+        cam.SetTarget(input1.transform);
+
     }
 
     void SpawnPlayer1WithGamepad(Gamepad pad)
     {
-        var player1 = Instantiate(largeMonkeyPrefab, new Vector3(-2, 0, 0), Quaternion.identity);
+        var player1 = Instantiate(largeMonkeyPrefab, transform.position + new Vector3(-2, 0, 0), Quaternion.identity);
         var input1 = player1.GetComponent<PlayerInput>();
         input1.SwitchCurrentControlScheme("Gamepad", pad);
 
         Debug.Log("Gracz 1: Gamepad " + pad.deviceId);
         player1Assigned = true;
         pad1 = pad;
+        cam.SetTarget(input1.transform);
     }
 
     void SpawnPlayer2WithGamepad(Gamepad pad)
     {
-        var player2 = Instantiate(smallMonkeyPrefab, new Vector3(2, 0, 0), Quaternion.identity);
+        var player2 = Instantiate(smallMonkeyPrefab, transform.position + new Vector3(2, 0, 0), Quaternion.identity);
         var input2 = player2.GetComponent<PlayerInput>();
         input2.SwitchCurrentControlScheme("Gamepad", pad);
 

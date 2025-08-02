@@ -70,6 +70,7 @@ public class BigMonkeyController : MonkeyControllerBase
         {
             currentClimbTarget = null;
         }
+        ReleaseGrabImmediate();
     }
 
     protected override void Interact()

@@ -10,31 +10,34 @@ public abstract class MonkeyControllerBase : MonoBehaviour
     public Transform groundCheck;
     public LayerMask groundLayer;
     public float groundCheckDistance = 0.2f;
-    protected virtual bool IsGrabbed => false;
+    public float airControlMultiplier = 0.2f;
+    private float cachedJumpVelocityX = 0f;
     protected Rigidbody2D rb;
     protected PlayerInputHandler inputHandler;
 
     public bool isGrounded;
     protected bool facingRight = true;
 
+    protected virtual bool IsGrabbed => false;
+
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         inputHandler = GetComponent<PlayerInputHandler>();
-
-        inputHandler.InteractPressed += Interact;
-        inputHandler.InteractReleased += OnInteractReleased;
     }
 
     protected virtual void Update()
     {
         HandleFlip();
 
-        if (inputHandler.IsJumping && (IsGrounded() || IsGrabbed))
+        if (inputHandler.IsJumping && IsGrounded())
             Jump();
 
         if (inputHandler.IsAttacking)
             Attack();
+
+        if (inputHandler.IsInteracting)
+            Interact();
     }
 
     protected virtual void FixedUpdate()
@@ -42,7 +45,6 @@ public abstract class MonkeyControllerBase : MonoBehaviour
         UpdateGrounded();
         HandleMovement();
     }
-
     protected virtual void HandleMovement()
     {
         if (!CanMove())
@@ -51,11 +53,31 @@ public abstract class MonkeyControllerBase : MonoBehaviour
             return;
         }
 
-        float speed = inputHandler.IsSprinting ? runSpeed : walkSpeed;
-        Vector2 move = new Vector2(inputHandler.MoveInput.x * speed, rb.linearVelocity.y);
-        rb.linearVelocity = move;
-    }
+        if (IsGrabbed)
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
 
+        float speed = inputHandler.IsSprinting ? runSpeed : walkSpeed;
+
+        float moveInputX = inputHandler.MoveInput.x;
+
+        float velocityX;
+
+        if (IsGrounded())
+        {
+            velocityX = moveInputX * speed;
+            cachedJumpVelocityX = velocityX;
+        }
+        else
+        {
+            float airInfluence = moveInputX * speed * airControlMultiplier;
+            velocityX = cachedJumpVelocityX + airInfluence;
+        }
+
+        rb.linearVelocity = new Vector2(velocityX, rb.linearVelocity.y);
+    }
     protected virtual bool CanMove()
     {
         return true;
@@ -87,12 +109,8 @@ public abstract class MonkeyControllerBase : MonoBehaviour
         transform.localScale = scale;
     }
 
-    // Abstract for monkey-specific logic
     protected abstract void Jump();
     protected abstract void Attack();
     protected abstract void SpecialAbility();
     protected abstract void Interact();
-
-    // Optional to override
-    protected virtual void OnInteractReleased() { }
 }

@@ -496,16 +496,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bde394e3140d0414dbe469315c769ce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 5
-  runSpeed: 8
-  jumpForce: 4
+  walkSpeed: 8
+  runSpeed: 10
+  jumpForce: 6.5
   groundCheck: {fileID: 7788285657365019877}
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
   groundCheckDistance: 0.2
-  airControlMultiplier: 0.5
-  isGrounded: 0
   gravityRestoreDelay: 0.1
   climbSpeed: 30
   jumpFromLedge: 0
@@ -521,15 +519,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 243ec0be01760ac46892f26c09bad3ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMaxHealth: 0
-  playerCurrentHealth: 0
-  playerMaxAmmo: 0
-  playerCurrentAmmo: 0
+  playerMaxHealth: 70
+  playerCurrentHealth: 70
+  playerMaxAmmo: 20
+  playerCurrentAmmo: 5
   playerMaxSpeed: 0
   playerSpeed: 0
   playerRegen: 0
   playerJumpHeight: 0
-  playerReload: 0
+  playerReload: 3
 --- !u!95 &7281540961236917926
 Animator:
   serializedVersion: 7

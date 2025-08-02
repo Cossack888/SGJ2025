@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 492977781977765992}
   - component: {fileID: 1197062252994030692}
   - component: {fileID: 7355360764601289623}
+  - component: {fileID: -5271155704011313334}
   m_Layer: 0
   m_Name: BananaBunch
   m_TagString: BananaBunch
@@ -170,7 +171,44 @@ MonoBehaviour:
   rb2d: {fileID: 0}
   capCol2d: {fileID: 0}
   ammoNum: 5
-  healthNum: 0
+  healthNum: 10
+--- !u!70 &-5271155704011313334
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7690173821860124229}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.080702364, y: 0.029346466}
+  m_Size: {x: 1.476878, y: 1.6845274}
+  m_Direction: 0
 --- !u!1001 &322012519615201383
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -5356,7 +5356,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: gb_body/gb_front_udo/bone_12/bone_13/bone_14
+    path: gb_body/gb_front_udo/bone_12/bone_13
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -5368,7 +5368,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: gb_body/gb_front_udo/bone_12/bone_13/bone_14
+    path: gb_body/gb_front_udo/bone_12/bone_13
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -5380,7 +5380,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: gb_body/gb_front_udo/bone_12/bone_13/bone_14
+    path: gb_body/gb_front_udo/bone_12/bone_13
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -5788,7 +5788,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: gb_body/gb_front_udo
+    path: gb_body/gb_front_ramieie
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -5800,7 +5800,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: gb_body/gb_front_udo
+    path: gb_body/gb_front_ramieie
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -5812,7 +5812,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: gb_body/gb_front_udo
+    path: gb_body/gb_front_ramieie
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -5824,7 +5824,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: gb_body/gb_back_udo/bone_16
+    path: gb_body/gb_back_udo
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -5836,7 +5836,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: gb_body/gb_back_udo/bone_16
+    path: gb_body/gb_back_udo
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -5848,7 +5848,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: gb_body/gb_back_udo/bone_16
+    path: gb_body/gb_back_udo
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -5896,7 +5896,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: gb_body/gb_front_ramieie
+    path: gb_body/gb_back_udo/bone_16/bone_17
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -5908,7 +5908,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: gb_body/gb_front_ramieie
+    path: gb_body/gb_back_udo/bone_16/bone_17
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -5920,7 +5920,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: gb_body/gb_front_ramieie
+    path: gb_body/gb_back_udo/bone_16/bone_17
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -5932,7 +5932,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: gb_body/gb_front_udo/bone_12/bone_13
+    path: gb_body/gb_front_udo/bone_12
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -5944,7 +5944,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: gb_body/gb_front_udo/bone_12/bone_13
+    path: gb_body/gb_front_udo/bone_12
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -5956,7 +5956,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: gb_body/gb_front_udo/bone_12/bone_13
+    path: gb_body/gb_front_udo/bone_12
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -6004,7 +6004,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: gb_body/gb_front_udo/bone_12
+    path: gb_body/gb_front_udo
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -6016,7 +6016,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: gb_body/gb_front_udo/bone_12
+    path: gb_body/gb_front_udo
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -6028,7 +6028,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: gb_body/gb_front_udo/bone_12
+    path: gb_body/gb_front_udo
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -6112,7 +6112,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: gb_body/gb_back_udo
+    path: gb_body/gb_back_udo/bone_16
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -6124,7 +6124,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: gb_body/gb_back_udo
+    path: gb_body/gb_back_udo/bone_16
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -6136,7 +6136,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: gb_body/gb_back_udo
+    path: gb_body/gb_back_udo/bone_16
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -6256,7 +6256,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: gb_body/gb_back_udo/bone_16/bone_17
+    path: gb_body/gb_front_udo/bone_12/bone_13/bone_14
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -6268,7 +6268,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: gb_body/gb_back_udo/bone_16/bone_17
+    path: gb_body/gb_front_udo/bone_12/bone_13/bone_14
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -6280,7 +6280,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: gb_body/gb_back_udo/bone_16/bone_17
+    path: gb_body/gb_front_udo/bone_12/bone_13/bone_14
     classID: 4
     script: {fileID: 0}
     flags: 0

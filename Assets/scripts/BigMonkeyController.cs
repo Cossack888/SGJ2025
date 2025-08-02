@@ -106,8 +106,8 @@ public class BigMonkeyController : MonoBehaviour
 
             float finalJumpForce = jumpForce;
 
-            /*// Sprawdü kπt pod postaciπ tylko gdy jest na ziemi
-            if (IsGrounded())
+            // Sprawdü kπt pod postaciπ tylko gdy jest na ziemi
+            /*if (IsGrounded())
             {
                 RaycastHit2D hit = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance + 0.1f, groundLayer);
                 if (hit.collider != null)
@@ -139,7 +139,6 @@ public class BigMonkeyController : MonoBehaviour
             rb.gravityScale = 1f;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, finalJumpForce);
         }
-        animator.SetTrigger("Jump");
     }
 
 

@@ -199,8 +199,8 @@ MonoBehaviour:
   netForce: 7
   netLoaded: 0
   baton: {fileID: 0}
-  contactDmg: 0
-  contactDmgMult: 0
+  contactDmg: 5
+  contactDmgMult: 2
   shootingSpeed: 2
   players: []
   allDarts: []

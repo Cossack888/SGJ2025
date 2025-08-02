@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerLoc: {x: 0, y: 0}
-  damageValue: 0
+  damageValue: 3
   bulletSpeed: 4
 --- !u!1001 &3475830823122602822
 PrefabInstance:

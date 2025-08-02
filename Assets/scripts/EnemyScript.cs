@@ -20,7 +20,7 @@ public class EnemyScript : MonoBehaviour
 
     [SerializeField] private float shootingSpeed;
 
-    [SerializeField] private PlayerInput[] players;
+    [SerializeField] private PlayerStatTracker[] players;
     private Transform player;
 
     [SerializeField] private List<DartScript> allDarts = new List<DartScript>();
@@ -54,7 +54,7 @@ public class EnemyScript : MonoBehaviour
         objOrigin = new Vector2(transform.position.x, transform.position.y);
         startTime = Time.time;
 
-        players = FindObjectsByType<PlayerInput>(FindObjectsSortMode.None);
+        players = FindObjectsByType<PlayerStatTracker>(FindObjectsSortMode.None);
 
 
 
@@ -149,25 +149,28 @@ public class EnemyScript : MonoBehaviour
         }
         else
         {
-            for (int d = 0; d <= allDarts.Count; d++)
+            if (allDarts != null)
             {
-                if (!allDarts[d].gameObject.activeSelf)
+                for (int d = 0; d <= allDarts.Count; d++)
                 {
-                    allDarts[d].transform.position = transform.position;
-                    allDarts[d].playerLoc = player.position;
-                    allDarts[d].gameObject.SetActive(true);
-                    break;
+                    if (!allDarts[d].gameObject.activeSelf)
+                    {
+                        allDarts[d].transform.position = transform.position;
+                        allDarts[d].playerLoc = player.position;
+                        allDarts[d].gameObject.SetActive(true);
+                        break;
+                    }
                 }
             }
         }
     }
 
-    Transform TargetPlayer(PlayerInput[] p)
+    Transform TargetPlayer(PlayerStatTracker[] p)
     {
         Transform tMin = null;
         float minDist = Mathf.Infinity;
         Vector3 currentPos = transform.position;
-        foreach (PlayerInput t in p)
+        foreach (PlayerStatTracker t in p)
         {
             float dist = Vector3.Distance(t.transform.position, currentPos);
             if (dist < minDist)

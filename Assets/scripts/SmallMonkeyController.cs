@@ -25,6 +25,8 @@ public class SmallMonkeyController : MonkeyControllerBase
         base.Awake();
         inputHandler.AttackPressed += OnAttackPress;
         inputHandler.AttackReleased += OnAttackRelease;
+        inputHandler.Menu += MenuOpen;
+        inputHandler.MenuClose += MenuClose;
     }
 
     private void Start()
@@ -137,4 +139,16 @@ public class SmallMonkeyController : MonkeyControllerBase
     {
         Debug.Log("Small monkey Special");
     }
+
+    public void MenuOpen()
+    {
+        LevelManager.Instance.OpenMenu();
+    }
+
+    public void MenuClose()
+    {
+        LevelManager.Instance.CloseMenu();
+    }
+
+
 }

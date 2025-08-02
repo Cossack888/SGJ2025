@@ -12,7 +12,8 @@ public class PlayerInputHandler : MonoBehaviour
     public event Action InteractPressed;
     public event Action InteractReleased;
     public event Action JumpPressed;
-
+    public event Action Menu;
+    public event Action MenuClose;
     public Vector2 MoveInput { get; private set; }
     public Vector2 LookInput { get; private set; }
     public bool IsJumping { get; private set; }
@@ -45,6 +46,14 @@ public class PlayerInputHandler : MonoBehaviour
         {
             JumpPressed?.Invoke();
         };
+        _map.FindAction("Menu").performed += _ =>
+        {
+            Menu?.Invoke();
+        };
+        _map.FindAction("Close").performed += _ =>
+        {
+            MenuClose?.Invoke();
+        };
 
         _map.FindAction("Attack").started += _ =>
         {
@@ -67,5 +76,7 @@ public class PlayerInputHandler : MonoBehaviour
             IsInteracting = false;
             InteractReleased?.Invoke();
         };
+
+
     }
 }

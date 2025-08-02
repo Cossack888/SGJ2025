@@ -40,7 +40,6 @@ public class GameManager : MonoBehaviour
         else
             Debug.LogError("Missing PlayerInput component on the small monkey!");
     }
-
     void Update()
     {
         if (!player1Assigned)

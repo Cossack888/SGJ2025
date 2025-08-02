@@ -9,6 +9,7 @@ TagManager:
   - Bullet
   - BananaBunch
   - ProjectileCollider
+  - FireWall
   layers:
   - Default
   - TransparentFX

@@ -23,18 +23,18 @@ public class DartScript : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine("DisableDart");
-        
         playerLoc.y = playerLoc.y + 1;
         moveDirection = (playerLoc - (Vector2)transform.position).normalized;
+
         RotateObject();
 
+        StartCoroutine("DisableDart");
     }
 
     private void RotateObject()
     {
         float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        transform.rotation = Quaternion.Euler(0f, 0f, angle - 180f);
     }
 
     // Update is called once per frame

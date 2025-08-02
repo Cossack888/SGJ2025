@@ -14,7 +14,7 @@ public class SmallMonkeyController : MonkeyControllerBase
     public LineRenderer trajectoryRenderer;
     public int trajectoryPoints = 30;
     public float trajectoryTimeStep = 0.1f;
-
+    public Transform bigMonkey;
     private float lastThrowTime;
     private bool isCharging;
     private float chargeStartTime;
@@ -26,14 +26,14 @@ public class SmallMonkeyController : MonkeyControllerBase
         inputHandler.AttackPressed += OnAttackPress;
         inputHandler.AttackReleased += OnAttackRelease;
     }
+
     private void Start()
     {
         lastValidAimDirection = facingRight ? Vector2.right : Vector2.left;
     }
+
     protected override void Update()
     {
-        base.Update();
-
         if (isCharging)
         {
             float heldTime = Mathf.Clamp(Time.time - chargeStartTime, 0f, maxChargeTime);
@@ -45,16 +45,26 @@ public class SmallMonkeyController : MonkeyControllerBase
 
             ShowTrajectory(lastValidAimDirection, currentForce);
         }
+
+        if (inputHandler.IsInteracting)
+            Interact();
+    }
+
+    protected override void FixedUpdate()
+    {
+        transform.position = bigMonkey.position;
+    }
+
+    protected override void HandleMovement()
+    {
     }
 
     protected override void Jump()
     {
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
     }
 
     protected override void Attack()
     {
-        // Attack is handled by OnAttackPress/Release
     }
 
     public void OnAttackPress()
@@ -68,9 +78,7 @@ public class SmallMonkeyController : MonkeyControllerBase
 
         Vector2 look = inputHandler.LookInput;
         if (look.magnitude > 0.1f)
-        {
             lastValidAimDirection = look.normalized;
-        }
     }
 
     public void OnAttackRelease()
@@ -122,12 +130,11 @@ public class SmallMonkeyController : MonkeyControllerBase
 
     protected override void Interact()
     {
-        Debug.Log("Use Special Ability");
+        Debug.Log("Small monkey Interact");
     }
+
     protected override void SpecialAbility()
     {
-        Debug.Log("Use Special Ability");
+        Debug.Log("Small monkey Special");
     }
 }
-
-

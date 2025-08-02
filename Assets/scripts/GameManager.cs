@@ -4,38 +4,58 @@ using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject smallMonkeyPrefab;
     public GameObject largeMonkeyPrefab;
 
     private bool player1Assigned = false;
     private bool player2Assigned = false;
 
-    private Gamepad pad1;
-    private Gamepad pad2;
-
     private HashSet<InputDevice> usedDevices = new HashSet<InputDevice>();
     private CameraController cam;
+
+    private GameObject largeMonkeyInstance;
+    private GameObject smallMonkeyInstance;
+
     private void Start()
     {
         cam = FindAnyObjectByType<CameraController>();
+
+        // Instantiate the large monkey
+        largeMonkeyInstance = Instantiate(largeMonkeyPrefab, transform.position + new Vector3(-2, 0, 0), Quaternion.identity);
+
+        // Find the small monkey as a child of the large monkey (including inactive objects)
+        var smallController = largeMonkeyInstance.GetComponentInChildren<SmallMonkeyController>(true);
+
+        if (smallController == null)
+        {
+            Debug.LogError("Could not find SmallMonkeyController as a child of the large monkey!");
+            return;
+        }
+
+        smallMonkeyInstance = smallController.gameObject;
+
+        // Temporarily disable PlayerInput for the small monkey
+        var smallInput = smallMonkeyInstance.GetComponent<PlayerInput>();
+        if (smallInput != null)
+            smallInput.enabled = false;
+        else
+            Debug.LogError("Missing PlayerInput component on the small monkey!");
     }
+
     void Update()
     {
         if (!player1Assigned)
         {
             if (Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame && !usedDevices.Contains(Keyboard.current))
             {
-                SpawnPlayer1WithKeyboard();
-                usedDevices.Add(Keyboard.current);
+                AssignLargeMonkeyToDevice(Keyboard.current, "Keyboard&Mouse");
             }
-            else if (Gamepad.all.Count > 0)
+            else
             {
                 foreach (var pad in Gamepad.all)
                 {
                     if (pad.buttonSouth.wasPressedThisFrame && !usedDevices.Contains(pad))
                     {
-                        SpawnPlayer1WithGamepad(pad);
-                        usedDevices.Add(pad);
+                        AssignLargeMonkeyToDevice(pad, "Gamepad");
                         break;
                     }
                 }
@@ -43,54 +63,49 @@ public class GameManager : MonoBehaviour
         }
         else if (!player2Assigned)
         {
-            if (Gamepad.all.Count > 0)
+            foreach (var pad in Gamepad.all)
             {
-                foreach (var pad in Gamepad.all)
+                if (pad.buttonSouth.wasPressedThisFrame && !usedDevices.Contains(pad))
                 {
-                    if (pad.buttonSouth.wasPressedThisFrame && !usedDevices.Contains(pad))
-                    {
-                        SpawnPlayer2WithGamepad(pad);
-                        usedDevices.Add(pad);
-                        break;
-                    }
+                    AssignSmallMonkeyToDevice(pad, "Gamepad");
+                    break;
                 }
             }
         }
     }
 
-    void SpawnPlayer1WithKeyboard()
+    private void AssignLargeMonkeyToDevice(InputDevice device, string controlScheme)
     {
-        var player1 = Instantiate(largeMonkeyPrefab, transform.position + new Vector3(-2, 0, 0), Quaternion.identity);
-        var input1 = player1.GetComponent<PlayerInput>();
-        input1.SwitchCurrentControlScheme("Keyboard&Mouse", Keyboard.current);
+        var input = largeMonkeyInstance.GetComponent<PlayerInput>();
+        input.SwitchCurrentControlScheme(controlScheme, device);
+        input.ActivateInput();
 
-        Debug.Log("Gracz 1: Klawiatura");
+        usedDevices.Add(device);
         player1Assigned = true;
-        pad1 = null;
-        cam.SetTarget(input1.transform);
 
+        cam.SetTarget(input.transform);
+        Debug.Log("Player 1 controls the large monkey (" + controlScheme + ")");
     }
 
-    void SpawnPlayer1WithGamepad(Gamepad pad)
+    private void AssignSmallMonkeyToDevice(InputDevice device, string controlScheme)
     {
-        var player1 = Instantiate(largeMonkeyPrefab, transform.position + new Vector3(-2, 0, 0), Quaternion.identity);
-        var input1 = player1.GetComponent<PlayerInput>();
-        input1.SwitchCurrentControlScheme("Gamepad", pad);
+        if (smallMonkeyInstance == null)
+        {
+            Debug.LogError("Small monkey instance is missing!");
+            return;
+        }
 
-        Debug.Log("Gracz 1: Gamepad " + pad.deviceId);
-        player1Assigned = true;
-        pad1 = pad;
-        cam.SetTarget(input1.transform);
-    }
+        var input = smallMonkeyInstance.GetComponent<PlayerInput>();
 
-    void SpawnPlayer2WithGamepad(Gamepad pad)
-    {
-        var player2 = Instantiate(smallMonkeyPrefab, transform.position + new Vector3(2, 0, 0), Quaternion.identity);
-        var input2 = player2.GetComponent<PlayerInput>();
-        input2.SwitchCurrentControlScheme("Gamepad", pad);
+        if (!input.enabled)
+            input.enabled = true;
 
-        Debug.Log("Gracz 2: Gamepad " + pad.deviceId);
+        input.SwitchCurrentControlScheme(controlScheme, new InputDevice[] { device });
+        input.ActivateInput();
+
+        usedDevices.Add(device);
         player2Assigned = true;
-        pad2 = pad;
+
+        Debug.Log("Player 2 controls the small monkey (" + controlScheme + ")");
     }
 }

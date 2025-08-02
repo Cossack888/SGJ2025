@@ -49,7 +49,7 @@ public class BigMonkeyController : MonkeyControllerBase
     {
         return !isGrabbed;
     }
-
+    /*
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Climbable"))
@@ -72,7 +72,7 @@ public class BigMonkeyController : MonkeyControllerBase
         }
         ReleaseGrabImmediate();
     }
-
+    */
     protected override void Interact()
     {
         if (!isGrabbed && currentClimbTarget != null)
@@ -143,5 +143,23 @@ public class BigMonkeyController : MonkeyControllerBase
     protected override bool IsGrounded()
     {
         return base.IsGrounded() || isGrabbed || pendingGravityRestore;
+    }
+    public void NotifyEnteredGrabZone(Collider2D climbable)
+    {
+        currentClimbTarget = climbable;
+        if (wantsToGrab && !isGrabbed)
+        {
+            Grab();
+            wantsToGrab = false;
+        }
+    }
+
+    public void NotifyExitedGrabZone(Collider2D climbable)
+    {
+        if (climbable == currentClimbTarget)
+        {
+            currentClimbTarget = null;
+            ReleaseGrabImmediate();
+        }
     }
 }

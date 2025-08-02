@@ -6,6 +6,7 @@ public class BananaBunchScript : MonoBehaviour
     [SerializeField] private CapsuleCollider2D capCol2d;
 
     [SerializeField] private int ammoNum;
+    [SerializeField] private float healthNum;
 
     void Start()
     {
@@ -35,8 +36,10 @@ public class BananaBunchScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            // add ammo to the amo counter of the monkeys
-            Debug.Log("Adding " + ammoNum + " amount of ammo to the smoll monkey.");
+            PlayerStatTracker pst = collision.gameObject.GetComponent<PlayerStatTracker>();
+
+            pst.PlayerAmmo += ammoNum;
+            pst.PlayerHealth += healthNum;
 
             gameObject.SetActive(false);
         }

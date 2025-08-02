@@ -11,6 +11,7 @@ public class PlayerInputHandler : MonoBehaviour
     public event Action AttackReleased;
     public event Action InteractPressed;
     public event Action InteractReleased;
+    public event Action JumpPressed;
 
     public Vector2 MoveInput { get; private set; }
     public Vector2 LookInput { get; private set; }
@@ -39,6 +40,11 @@ public class PlayerInputHandler : MonoBehaviour
 
         _map.FindAction("Sprint").performed += _ => IsSprinting = true;
         _map.FindAction("Sprint").canceled += _ => IsSprinting = false;
+
+        _map.FindAction("Jump").performed += _ =>
+        {
+            JumpPressed?.Invoke();
+        };
 
         _map.FindAction("Attack").started += _ =>
         {

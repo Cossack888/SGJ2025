@@ -11,14 +11,21 @@ public abstract class MonkeyControllerBase : MonoBehaviour
     public LayerMask groundLayer;
     public float groundCheckDistance = 0.2f;
     public float airControlMultiplier = 0.2f;
-    private float cachedJumpVelocityX = 0f;
+
     protected Rigidbody2D rb;
     protected PlayerInputHandler inputHandler;
-
-    public bool isGrounded;
     protected bool facingRight = true;
+    protected bool hasJumpedThisFrame = false;
+    public bool isGrounded;
+
+    private float cachedJumpVelocityX = 0f;
 
     protected virtual bool IsGrabbed => false;
+
+    /// <summary>
+    /// Can be overridden by subclasses (e.g. BigMonkeyController)
+    /// </summary>
+    protected virtual bool IsJumpingFromLedge => false;
 
     protected virtual void Awake()
     {
@@ -28,10 +35,8 @@ public abstract class MonkeyControllerBase : MonoBehaviour
 
     protected virtual void Update()
     {
-        HandleFlip();
-
-        if (inputHandler.IsJumping && IsGrounded())
-            Jump();
+        if (!IsGrabbed)
+            HandleFlip();
 
         if (inputHandler.IsAttacking)
             Attack();
@@ -43,24 +48,31 @@ public abstract class MonkeyControllerBase : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         UpdateGrounded();
-        HandleMovement();
+
+        if (IsJumpingFromLedge)
+            return;
+
+        if (!hasJumpedThisFrame)
+            HandleMovement();
+
+        hasJumpedThisFrame = false;
     }
+
     protected virtual void HandleMovement()
     {
-        if (!CanMove())
-        {
-            rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
-            return;
-        }
-
-        if (IsGrabbed)
+        if (IsGrabbed && !hasJumpedThisFrame)
         {
             rb.linearVelocity = Vector2.zero;
             return;
         }
 
-        float speed = inputHandler.IsSprinting ? runSpeed : walkSpeed;
+        if (!CanMove() && !hasJumpedThisFrame)
+        {
+            rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+            return;
+        }
 
+        float speed = inputHandler.IsSprinting ? runSpeed : walkSpeed;
         float moveInputX = inputHandler.MoveInput.x;
 
         float velocityX;
@@ -78,16 +90,15 @@ public abstract class MonkeyControllerBase : MonoBehaviour
 
         rb.linearVelocity = new Vector2(velocityX, rb.linearVelocity.y);
     }
-    protected virtual bool CanMove()
-    {
-        return true;
-    }
+
+    protected virtual bool CanMove() => true;
 
     private void HandleFlip()
     {
-        if (inputHandler.MoveInput.x > 0 && !facingRight)
+        float inputX = inputHandler.MoveInput.x;
+        if (inputX > 0 && !facingRight)
             Flip();
-        else if (inputHandler.MoveInput.x < 0 && facingRight)
+        else if (inputX < 0 && facingRight)
             Flip();
     }
 

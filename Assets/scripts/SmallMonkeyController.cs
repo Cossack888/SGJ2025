@@ -120,6 +120,10 @@ public class SmallMonkeyController : MonkeyControllerBase
         trajectoryRenderer.SetPositions(points);
     }
 
+    protected override void Interact()
+    {
+        Debug.Log("Use Special Ability");
+    }
     protected override void SpecialAbility()
     {
         Debug.Log("Use Special Ability");

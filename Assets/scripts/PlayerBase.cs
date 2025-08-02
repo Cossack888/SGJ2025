@@ -10,11 +10,11 @@ public abstract class MonkeyControllerBase : MonoBehaviour
     public Transform groundCheck;
     public LayerMask groundLayer;
     public float groundCheckDistance = 0.2f;
-
+    protected virtual bool IsGrabbed => false;
     protected Rigidbody2D rb;
     protected PlayerInputHandler inputHandler;
 
-    protected bool isGrounded;
+    public bool isGrounded;
     protected bool facingRight = true;
 
     protected virtual void Awake()
@@ -22,29 +22,43 @@ public abstract class MonkeyControllerBase : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         inputHandler = GetComponent<PlayerInputHandler>();
 
+        inputHandler.InteractPressed += Interact;
+        inputHandler.InteractReleased += OnInteractReleased;
     }
 
     protected virtual void Update()
     {
         HandleFlip();
 
-        if (inputHandler.IsJumping && isGrounded)
+        if (inputHandler.IsJumping && (IsGrounded() || IsGrabbed))
             Jump();
 
         if (inputHandler.IsAttacking)
             Attack();
-
-        if (inputHandler.IsInteracting)
-            SpecialAbility();
     }
 
     protected virtual void FixedUpdate()
     {
         UpdateGrounded();
+        HandleMovement();
+    }
+
+    protected virtual void HandleMovement()
+    {
+        if (!CanMove())
+        {
+            rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+            return;
+        }
 
         float speed = inputHandler.IsSprinting ? runSpeed : walkSpeed;
-        Vector2 move = new Vector2(inputHandler.MoveInput.x * speed, rb.linearVelocityY);
+        Vector2 move = new Vector2(inputHandler.MoveInput.x * speed, rb.linearVelocity.y);
         rb.linearVelocity = move;
+    }
+
+    protected virtual bool CanMove()
+    {
+        return true;
     }
 
     private void HandleFlip()
@@ -55,7 +69,12 @@ public abstract class MonkeyControllerBase : MonoBehaviour
             Flip();
     }
 
-    private void UpdateGrounded()
+    protected virtual bool IsGrounded()
+    {
+        return isGrounded;
+    }
+
+    protected void UpdateGrounded()
     {
         isGrounded = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, groundLayer);
     }
@@ -67,7 +86,13 @@ public abstract class MonkeyControllerBase : MonoBehaviour
         scale.x *= -1;
         transform.localScale = scale;
     }
+
+    // Abstract for monkey-specific logic
     protected abstract void Jump();
     protected abstract void Attack();
     protected abstract void SpecialAbility();
+    protected abstract void Interact();
+
+    // Optional to override
+    protected virtual void OnInteractReleased() { }
 }

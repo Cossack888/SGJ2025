@@ -4,7 +4,8 @@ using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject playerPrefab;
+    public GameObject smallMonkeyPrefab;
+    public GameObject largeMonkeyPrefab;
 
     private bool player1Assigned = false;
     private bool player2Assigned = false;
@@ -57,7 +58,7 @@ public class GameManager : MonoBehaviour
 
     void SpawnPlayer1WithKeyboard()
     {
-        var player1 = Instantiate(playerPrefab, new Vector3(-2, 0, 0), Quaternion.identity);
+        var player1 = Instantiate(largeMonkeyPrefab, new Vector3(-2, 0, 0), Quaternion.identity);
         var input1 = player1.GetComponent<PlayerInput>();
         input1.SwitchCurrentControlScheme("Keyboard&Mouse", Keyboard.current);
 
@@ -68,7 +69,7 @@ public class GameManager : MonoBehaviour
 
     void SpawnPlayer1WithGamepad(Gamepad pad)
     {
-        var player1 = Instantiate(playerPrefab, new Vector3(-2, 0, 0), Quaternion.identity);
+        var player1 = Instantiate(largeMonkeyPrefab, new Vector3(-2, 0, 0), Quaternion.identity);
         var input1 = player1.GetComponent<PlayerInput>();
         input1.SwitchCurrentControlScheme("Gamepad", pad);
 
@@ -79,7 +80,7 @@ public class GameManager : MonoBehaviour
 
     void SpawnPlayer2WithGamepad(Gamepad pad)
     {
-        var player2 = Instantiate(playerPrefab, new Vector3(2, 0, 0), Quaternion.identity);
+        var player2 = Instantiate(smallMonkeyPrefab, new Vector3(2, 0, 0), Quaternion.identity);
         var input2 = player2.GetComponent<PlayerInput>();
         input2.SwitchCurrentControlScheme("Gamepad", pad);
 

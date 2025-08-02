@@ -6,8 +6,12 @@ using UnityEngine.InputSystem;
 public class PlayerInputHandler : MonoBehaviour
 {
     private InputActionMap _map;
+
     public event Action AttackPressed;
     public event Action AttackReleased;
+    public event Action InteractPressed;
+    public event Action InteractReleased;
+
     public Vector2 MoveInput { get; private set; }
     public Vector2 LookInput { get; private set; }
     public bool IsJumping { get; private set; }
@@ -36,13 +40,26 @@ public class PlayerInputHandler : MonoBehaviour
         _map.FindAction("Sprint").performed += _ => IsSprinting = true;
         _map.FindAction("Sprint").canceled += _ => IsSprinting = false;
 
-        /* _map.FindAction("Attack").performed += _ => IsAttacking = true;
-         _map.FindAction("Attack").canceled += _ => IsAttacking = false;*/
+        _map.FindAction("Attack").started += _ =>
+        {
+            IsAttacking = true;
+            AttackPressed?.Invoke();
+        };
+        _map.FindAction("Attack").canceled += _ =>
+        {
+            IsAttacking = false;
+            AttackReleased?.Invoke();
+        };
 
-        _map.FindAction("Interact").performed += _ => IsInteracting = true;
-        _map.FindAction("Interact").canceled += _ => IsInteracting = false;
-
-        _map.FindAction("Attack").started += _ => AttackPressed?.Invoke();
-        _map.FindAction("Attack").canceled += _ => AttackReleased?.Invoke();
+        _map.FindAction("Interact").started += _ =>
+        {
+            IsInteracting = true;
+            InteractPressed?.Invoke();
+        };
+        _map.FindAction("Interact").canceled += _ =>
+        {
+            IsInteracting = false;
+            InteractReleased?.Invoke();
+        };
     }
 }

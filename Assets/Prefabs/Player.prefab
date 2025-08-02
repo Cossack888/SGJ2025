@@ -107,7 +107,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d6d23a37c5f94424980422c28143f133, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cf50b9ac54ef7814b96598ad3f305e66, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -530,7 +530,7 @@ Transform:
   m_GameObject: {fileID: 2090705268932627345}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.8, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -561,7 +561,7 @@ Transform:
   m_GameObject: {fileID: 6864373059776019032}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.1, y: 1.57, z: 0}
+  m_LocalPosition: {x: 0.01, y: 1.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -594,7 +594,7 @@ Transform:
   m_GameObject: {fileID: 7730204320750937685}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.4, y: 19.3, z: 0}
+  m_LocalPosition: {x: 1.18, y: 1.81, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -648,7 +648,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 3
+  m_Radius: 0.4
 --- !u!1001 &1965461926065977545
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -701,6 +701,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5216796338400584423, guid: c0759eafb9ee1364f9b6731e2e8f5c44, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6259408930583377618, guid: c0759eafb9ee1364f9b6731e2e8f5c44, type: 3}
       propertyPath: m_BodyType
       value: 2
@@ -713,9 +717,15 @@ PrefabInstance:
       propertyPath: bigMonkey
       value: 
       objectReference: {fileID: 8725530885214106230}
+    - target: {fileID: 7137141802420698795, guid: c0759eafb9ee1364f9b6731e2e8f5c44, type: 3}
+      propertyPath: groundCheck
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3526679988256590569, guid: c0759eafb9ee1364f9b6731e2e8f5c44, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8865076812328852975, guid: c0759eafb9ee1364f9b6731e2e8f5c44, type: 3}
+    - {fileID: 6672754423083431432, guid: c0759eafb9ee1364f9b6731e2e8f5c44, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0759eafb9ee1364f9b6731e2e8f5c44, type: 3}

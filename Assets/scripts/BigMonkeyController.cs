@@ -36,7 +36,7 @@ public class BigMonkeyController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         inputHandler = GetComponent<PlayerInputHandler>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
 
         inputHandler.InteractReleased += InteractReleased;
         inputHandler.JumpPressed += Jump;
@@ -132,12 +132,13 @@ public class BigMonkeyController : MonoBehaviour
                 float speed = inputHandler.IsSprinting ? runSpeed : walkSpeed;
                 float jumpVelocityX = inputX * speed;
                 rb.gravityScale = 1f;
-                rb.linearVelocity = new Vector2(jumpVelocityX, finalJumpForce * 2f);
+                rb.linearVelocity = new Vector2(jumpVelocityX, finalJumpForce);
                 return;
             }
 
             rb.gravityScale = 1f;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, finalJumpForce);
+            animator.SetTrigger("Jump");
         }
     }
 
@@ -166,6 +167,14 @@ public class BigMonkeyController : MonoBehaviour
         {
             climbBounds = currentClimbTarget.bounds;
             isLedge = currentClimbTarget.GetComponent<Ledge>() != null;
+            if (isLedge)
+            {
+                animator.SetBool("Grabing", true);
+            }
+            else
+            {
+                animator.SetBool("Hanging", true);
+            }
         }
     }
 

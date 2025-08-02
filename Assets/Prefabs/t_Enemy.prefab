@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6696541485231209883}
   - component: {fileID: 6900834281868249220}
-  - component: {fileID: 3744031098573678642}
   - component: {fileID: 7406733779271062622}
   - component: {fileID: 986319239550413746}
+  - component: {fileID: 776068401506669824}
   m_Layer: 0
   m_Name: t_Enemy
   m_TagString: Enemy
@@ -90,23 +90,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3744031098573678642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4799680193148903603}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9b8be2e5e165f14ea137fd72a74c783, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dart: {fileID: 590839143905642972, guid: 1bfc3a03d0c9835478dfbe366d2353f6, type: 3}
-  net: {fileID: 0}
-  baton: {fileID: 0}
-  shootingSpeed: 1
-  players: []
 --- !u!61 &7406733779271062622
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -199,3 +182,21 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.41, y: 0.38}
   m_EdgeRadius: 0
+--- !u!114 &776068401506669824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4799680193148903603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5261eb2f586fb9a4188f657ca5f1ca81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dart: {fileID: 590839143905642972, guid: 8c338977ea1ed094b96ef8ebf2c2e91a, type: 3}
+  net: {fileID: 0}
+  baton: {fileID: 0}
+  shootingSpeed: 2
+  players: []
+  allDarts: []

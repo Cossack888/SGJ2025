@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5878964343006478843}
   - component: {fileID: 1161329945050271256}
   - component: {fileID: 8826029310622254408}
-  - component: {fileID: -417754451326926111}
+  - component: {fileID: 853485592526920096}
   m_Layer: 0
   m_Name: t_Dart
   m_TagString: Bullet
@@ -125,7 +125,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
---- !u!114 &-417754451326926111
+--- !u!114 &853485592526920096
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -134,7 +134,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 590839143905642972}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3c5ca1ac213a3843ac6cd2149ac8932, type: 3}
+  m_Script: {fileID: 11500000, guid: 02eb0174f1800be49b68673005d6c892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerLoc: {x: 0, y: 0}
+  bulletSpeed: 0

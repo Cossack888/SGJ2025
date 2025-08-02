@@ -21,7 +21,7 @@ public class PlayerStatTracker : MonoBehaviour
 
     public float ResetHealth
     {
-        set { playerCurrentHealth = playerHealth; }
+        get { return playerHealth; }
     }
 
     // AMMO
@@ -33,7 +33,7 @@ public class PlayerStatTracker : MonoBehaviour
 
     public int ResetAmmo
     {
-        set { playerCurrentAmmo = playerMaxAmmo; }
+        get { return playerMaxAmmo; }
     }
 
     // SPEED
@@ -45,7 +45,7 @@ public class PlayerStatTracker : MonoBehaviour
 
     public float ResetSpeed
     {
-        set { playerSpeed = playerMaxSpeed; }
+        get { return playerMaxSpeed; }
     }
 
     // REGEN

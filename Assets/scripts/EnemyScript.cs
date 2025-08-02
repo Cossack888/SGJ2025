@@ -15,6 +15,8 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] private float netForce;
     [SerializeField] private bool netLoaded = false;
     [SerializeField] private GameObject baton;
+    [SerializeField] private float contactDmg;
+    [SerializeField] private float contactDmgMult;
 
     [SerializeField] private float shootingSpeed;
 
@@ -92,11 +94,6 @@ public class EnemyScript : MonoBehaviour
                 InvokeRepeating("Shooting", 0.5f, shootingSpeed);
                 shooting = true;
             }
-        }
-
-        if (Input.GetKeyDown("space"))
-        {
-            ThrowNet();
         }
     }
 
@@ -209,6 +206,14 @@ public class EnemyScript : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             ChangeStateTo(EnemyState.Dead);
+
+            if (enemyState == EnemyState.Dazed)
+            {
+                // If enemy is already dazed, half damage
+                contactDmgMult = contactDmgMult / 2;
+            }
+
+            collision.gameObject.GetComponent<PlayerStatTracker>().PlayerHealth -= contactDmg * contactDmgMult;
         }
     }
 

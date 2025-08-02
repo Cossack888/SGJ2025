@@ -1,8 +1,12 @@
+using System;
 using UnityEngine;
 
 public class PlayerStatTracker : MonoBehaviour
 {
-    [SerializeField] private float playerHealth;
+
+    public event Action LoseGame;
+
+    [SerializeField] private float playerMaxHealth;
     [SerializeField] private float playerCurrentHealth;
     [SerializeField] private int playerMaxAmmo;
     [SerializeField] private int playerCurrentAmmo;
@@ -16,12 +20,17 @@ public class PlayerStatTracker : MonoBehaviour
     public float PlayerHealth
     {
         get { return playerCurrentHealth; }
-        set { playerCurrentHealth = value; }
+        set
+        {
+            playerCurrentHealth = value;
+            playerCurrentHealth = Mathf.Clamp(playerCurrentHealth, 0f, ResetHealth);
+            CheckHealth();
+        }
     }
 
     public float ResetHealth
     {
-        get { return playerHealth; }
+        get { return playerMaxHealth; }
     }
 
     // AMMO
@@ -67,5 +76,16 @@ public class PlayerStatTracker : MonoBehaviour
     {
         get { return playerReload; }
         set { playerReload = value; }
+    }
+
+    public void CheckHealth()
+    {
+        if (playerCurrentHealth <= 0)
+        {
+            // Essentially invokes the script across the game
+            // and any 'listener' set up for LoseGame will process
+            // once this script triggers as part of the "set health" process
+            LoseGame?.Invoke();
+        }
     }
 }

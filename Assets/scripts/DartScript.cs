@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class DartScript : MonoBehaviour
 {
+
+
     public Vector2 playerLoc;
     [SerializeField] private int damageValue;
 

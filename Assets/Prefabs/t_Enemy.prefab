@@ -197,7 +197,10 @@ MonoBehaviour:
   dart: {fileID: 590839143905642972, guid: 8c338977ea1ed094b96ef8ebf2c2e91a, type: 3}
   net: {fileID: 1441955539227364830, guid: 13167c8a9a569f942841c7acacdaabc7, type: 3}
   netForce: 7
+  netLoaded: 0
   baton: {fileID: 0}
+  contactDmg: 0
+  contactDmgMult: 0
   shootingSpeed: 2
   players: []
   allDarts: []

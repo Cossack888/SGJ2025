@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Bullet
   - BananaBunch
+  - ProjectileCollider
   layers:
   - Default
   - TransparentFX

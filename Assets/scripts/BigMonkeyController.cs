@@ -69,6 +69,7 @@ public class BigMonkeyController : MonoBehaviour
             float clampedY = Mathf.Clamp(newPosition.y, climbBounds.min.y, climbBounds.max.y);
             rb.MovePosition(new Vector2(rb.position.x, clampedY));
         }
+        UpdateAnimator();
     }
 
     private void FixedUpdate()
@@ -92,10 +93,23 @@ public class BigMonkeyController : MonoBehaviour
         float speed = inputHandler.IsSprinting ? runSpeed : walkSpeed;
         float inputX = inputHandler.MoveInput.x;
         float velocityX = inputX * speed;
-
         rb.linearVelocity = new Vector2(velocityX, rb.linearVelocity.y);
     }
-
+    private void UpdateAnimator()
+    {
+        if (isGrounded)
+        {
+            animator.SetFloat("speed", Mathf.Abs(rb.linearVelocity.x));
+            animator.SetBool("Jumping", false);
+            animator.SetBool("Falling", false);
+        }
+        else if (!isGrabbed && !isLedge)
+        {
+            animator.SetFloat("speed", 0f);
+            animator.SetBool("Jumping", rb.linearVelocity.y > 0.1f);
+            animator.SetBool("Falling", rb.linearVelocity.y < -0.1f);
+        }
+    }
     private void Jump()
     {
         if (hasJumpedThisFrame) return;
@@ -127,7 +141,6 @@ public class BigMonkeyController : MonoBehaviour
             {
                 ReleaseGrabImmediate();
                 jumpFromLedge = true;
-
                 float inputX = inputHandler.MoveInput.x;
                 float speed = inputHandler.IsSprinting ? runSpeed : walkSpeed;
                 float jumpVelocityX = inputX * speed;
@@ -138,7 +151,7 @@ public class BigMonkeyController : MonoBehaviour
 
             rb.gravityScale = 1f;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, finalJumpForce);
-            animator.SetTrigger("Jump");
+
         }
     }
 
@@ -182,12 +195,16 @@ public class BigMonkeyController : MonoBehaviour
     {
         isGrabbed = false;
         rb.gravityScale = 1f;
+        animator.SetBool("Grabing", false);
+        animator.SetBool("Hanging", false);
     }
 
     private void ReleaseGrabImmediate()
     {
         isGrabbed = false;
         rb.gravityScale = 1f;
+        animator.SetBool("Grabing", false);
+        animator.SetBool("Hanging", false);
     }
 
     private void HandleFlip()

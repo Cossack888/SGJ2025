@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 7833977099670706719}
   - component: {fileID: 7548547763203914477}
   - component: {fileID: 1064195036409651802}
+  - component: {fileID: 6859355687839830352}
   m_Layer: 0
-  m_Name: Climbpoint
+  m_Name: Climbpoint Ledge
   m_TagString: Climbable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -145,5 +146,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6236bef2c148184092c922cec1d1c52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6859355687839830352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6938846027451151065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95f789cf35e5369488e05f07363cc903, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

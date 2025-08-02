@@ -18,21 +18,21 @@ public class BananaBunchScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Banana")
         {
-            rb2d.simulated = true;
+            rb2d.bodyType = RigidbodyType2D.Dynamic;
             capCol2d.isTrigger = false;
         }
-    }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha8))
+        if (collision.gameObject.tag == "Player")
         {
-            rb2d.simulated = true;
-            capCol2d.isTrigger = false;
+            PlayerStatTracker pst = collision.gameObject.GetComponent<PlayerStatTracker>();
+
+            pst.PlayerAmmo += ammoNum;
+            pst.PlayerHealth += healthNum;
+
+            gameObject.SetActive(false);
         }
     }
-
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
@@ -44,4 +44,14 @@ public class BananaBunchScript : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            rb2d.bodyType = RigidbodyType2D.Dynamic;
+            capCol2d.isTrigger = false;
+        }
+    }
+
+    
 }

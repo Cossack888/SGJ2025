@@ -19815,6 +19815,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Climbpoint Ledge (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 7548547763203914477, guid: c30eb60e123963b4bbeb5b920344b8d2, type: 3}
+      propertyPath: m_Size.x
+      value: 1.8474832
+      objectReference: {fileID: 0}
+    - target: {fileID: 7548547763203914477, guid: c30eb60e123963b4bbeb5b920344b8d2, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.073054165
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24613,6 +24621,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Climbpoint Ledge (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7548547763203914477, guid: c30eb60e123963b4bbeb5b920344b8d2, type: 3}
+      propertyPath: m_Size.x
+      value: 2.081273
+      objectReference: {fileID: 0}
+    - target: {fileID: 7548547763203914477, guid: c30eb60e123963b4bbeb5b920344b8d2, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.014620841
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25671,6 +25687,14 @@ PrefabInstance:
     - target: {fileID: 6938846027451151065, guid: 9fbe3beca087dd54882f86e85b8105bf, type: 3}
       propertyPath: m_Name
       value: Climbpoint (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7548547763203914477, guid: 9fbe3beca087dd54882f86e85b8105bf, type: 3}
+      propertyPath: m_Size.y
+      value: 1.5493021
+      objectReference: {fileID: 0}
+    - target: {fileID: 7548547763203914477, guid: 9fbe3beca087dd54882f86e85b8105bf, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.27465105
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -29720,6 +29744,14 @@ PrefabInstance:
     - target: {fileID: 6938846027451151065, guid: 9fbe3beca087dd54882f86e85b8105bf, type: 3}
       propertyPath: m_Name
       value: Climbpoint (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7548547763203914477, guid: 9fbe3beca087dd54882f86e85b8105bf, type: 3}
+      propertyPath: m_Size.y
+      value: 1.3958936
+      objectReference: {fileID: 0}
+    - target: {fileID: 7548547763203914477, guid: 9fbe3beca087dd54882f86e85b8105bf, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.00000071525574
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -56660,6 +56692,14 @@ PrefabInstance:
     - target: {fileID: 6938846027451151065, guid: 9fbe3beca087dd54882f86e85b8105bf, type: 3}
       propertyPath: m_Name
       value: Climbpoint (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7548547763203914477, guid: 9fbe3beca087dd54882f86e85b8105bf, type: 3}
+      propertyPath: m_Size.y
+      value: 1.4255853
+      objectReference: {fileID: 0}
+    - target: {fileID: 7548547763203914477, guid: 9fbe3beca087dd54882f86e85b8105bf, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.06433275
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -99879,6 +99919,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Climbpoint Ledge (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7548547763203914477, guid: c30eb60e123963b4bbeb5b920344b8d2, type: 3}
+      propertyPath: m_Size.x
+      value: 2.3442836
+      objectReference: {fileID: 0}
+    - target: {fileID: 7548547763203914477, guid: c30eb60e123963b4bbeb5b920344b8d2, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.029218256
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -100970,6 +101018,14 @@ PrefabInstance:
     - target: {fileID: 6938846027451151065, guid: 9fbe3beca087dd54882f86e85b8105bf, type: 3}
       propertyPath: m_Name
       value: Climbpoint (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7548547763203914477, guid: 9fbe3beca087dd54882f86e85b8105bf, type: 3}
+      propertyPath: m_Size.y
+      value: 1.1959664
+      objectReference: {fileID: 0}
+    - target: {fileID: 7548547763203914477, guid: 9fbe3beca087dd54882f86e85b8105bf, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.020784676
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -102225,6 +102281,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Climbpoint Ledge (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7548547763203914477, guid: c30eb60e123963b4bbeb5b920344b8d2, type: 3}
+      propertyPath: m_Size.x
+      value: 2.139689
+      objectReference: {fileID: 0}
+    - target: {fileID: 7548547763203914477, guid: c30eb60e123963b4bbeb5b920344b8d2, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.014607906
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -103305,6 +103369,14 @@ PrefabInstance:
     - target: {fileID: 6938846027451151065, guid: c30eb60e123963b4bbeb5b920344b8d2, type: 3}
       propertyPath: m_Name
       value: Climbpoint Ledge (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7548547763203914477, guid: c30eb60e123963b4bbeb5b920344b8d2, type: 3}
+      propertyPath: m_Size.x
+      value: 1.8766782
+      objectReference: {fileID: 0}
+    - target: {fileID: 7548547763203914477, guid: c30eb60e123963b4bbeb5b920344b8d2, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.00001052022
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

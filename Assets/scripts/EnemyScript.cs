@@ -13,7 +13,7 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] private GameObject baton;
     [SerializeField] private float contactDmg;
     [SerializeField] private float contactDmgMult;
-
+    [SerializeField] GameObject VFX;
     [SerializeField] private float shootingSpeed;
 
     [SerializeField] private PlayerStatTracker[] players;
@@ -39,7 +39,8 @@ public class EnemyScript : MonoBehaviour
         // Remove this obj from the spawner parent
         // Note, should still be in the list of spawnable objects.
         transform.SetParent(null);
-
+        VFX = GetComponentInChildren<ParticleSystem>().gameObject;
+        VFX.SetActive(false);
         transform.position = parentOrigin;
         moveLoc = moveCoord;
         moveSpeed = speed;
@@ -99,6 +100,7 @@ public class EnemyScript : MonoBehaviour
         if (state == EnemyState.Dazed)
         {
             enemyState = EnemyState.Dazed;
+            VFX.SetActive(true);
         }
         else if (state == EnemyState.Dead)
         {

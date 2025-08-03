@@ -13,6 +13,7 @@ TagManager:
   - Fist
   - Banana
   - Net
+  - Spawner
   layers:
   - Default
   - TransparentFX

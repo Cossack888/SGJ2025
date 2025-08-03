@@ -54,7 +54,8 @@ public class DartScript : MonoBehaviour
             gameObject.SetActive(false);
             Debug.Log("Hit the player");
         }
-        else if (collision.gameObject.name == "GrabPoint")
+        else if (collision.gameObject.name == "GrabPoint" ||
+            collision.gameObject.tag == "Spawner")
         {
 
         }

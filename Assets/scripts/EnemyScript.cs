@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
@@ -26,7 +27,7 @@ public class EnemyScript : MonoBehaviour
 
     // time in game from the moment the spawner is triggered
     private float startTime;
-    private bool stopped = false;
+    [SerializeField] private bool stopped = false;
     bool shooting = false;
 
     EnemyState enemyState;
@@ -140,7 +141,9 @@ public class EnemyScript : MonoBehaviour
     {
         if (allDarts.Count < 10)
         {
-            GameObject spawnedDart = Instantiate(dart, transform);
+            Vector2 dartSpawn = new Vector2(transform.position.x - 0.6f, transform.position.y + 0.55f);
+
+            GameObject spawnedDart = Instantiate(dart, dartSpawn, transform.rotation);
             DartScript ds = spawnedDart.GetComponent<DartScript>();
             ds.playerLoc = player.position;
             allDarts.Add(ds);
@@ -186,6 +189,8 @@ public class EnemyScript : MonoBehaviour
         if (moveSpeed <= 0f)
         {
             Debug.LogWarning("moveSpeed is zero or negative!");
+
+            stopped = true;
             return;
         }
 

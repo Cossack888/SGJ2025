@@ -143,6 +143,7 @@ public class SmallMonkeyController : MonkeyControllerBase
     public void MenuOpen()
     {
         LevelManager.Instance.OpenMenu();
+        MenuManager.Instance.AssignControllingInput(inputHandler);
     }
 
     public void MenuClose()

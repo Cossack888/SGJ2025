@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -5,9 +6,14 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance { get; private set; }
 
     public GameObject Menu;
+    public PlayerStatTracker playerStatTracker;
+    public int points;
+    public TMP_Text pointsText;
+
 
     private void Awake()
     {
+        Time.timeScale = 1f;
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -16,7 +22,23 @@ public class LevelManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        UpdateUI();
     }
+    private void UpdateUI()
+    {
+        pointsText.text = points.ToString();
+    }
+
+    public void GainPoints(int point)
+    {
+        points += point;
+        UpdateUI();
+    }
+    public void SetStatTracker(PlayerStatTracker statTracker)
+    {
+        playerStatTracker = statTracker;
+    }
+
 
     private void Start()
     {
@@ -26,10 +48,19 @@ public class LevelManager : MonoBehaviour
 
     public void OpenMenu()
     {
-        Menu.SetActive(true);
+        if (MenuManager.Instance.ActiveMenu == null)
+        {
+            Menu.SetActive(true);
+            MenuManager.Instance.SetActivePanel("menu");
+        }
+
     }
     public void CloseMenu()
     {
-        Menu?.SetActive(false);
+        if (!MenuManager.Instance.IsTheDeathOrWinMenu())
+        {
+            MenuManager.Instance.CloseAllPanels();
+            Time.timeScale = 1f;
+        }
     }
 }

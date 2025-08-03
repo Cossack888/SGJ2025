@@ -40,6 +40,9 @@ public class BigMonkeyController : MonoBehaviour
 
         inputHandler.InteractReleased += InteractReleased;
         inputHandler.JumpPressed += Jump;
+        inputHandler.Menu += MenuOpen;
+        inputHandler.MenuClose += MenuClose;
+
     }
 
     private void Update()
@@ -241,7 +244,7 @@ public class BigMonkeyController : MonoBehaviour
 
     private void Attack()
     {
-        Debug.Log("Big monkey attacks!");
+        animator.SetTrigger("Punch");
     }
 
     private void OnDestroy()
@@ -264,5 +267,18 @@ public class BigMonkeyController : MonoBehaviour
             currentClimbTarget = null;
             ReleaseGrabImmediate();
         }
+    }
+    public void MenuOpen()
+    {
+        LevelManager.Instance.OpenMenu();
+        if (inputHandler != null)
+        {
+            MenuManager.Instance.AssignControllingInput(inputHandler);
+        }
+    }
+
+    public void MenuClose()
+    {
+        LevelManager.Instance.CloseMenu();
     }
 }

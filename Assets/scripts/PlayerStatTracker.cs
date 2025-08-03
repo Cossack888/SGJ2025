@@ -5,7 +5,6 @@ public class PlayerStatTracker : MonoBehaviour
 {
 
     public event Action LoseGame;
-
     [SerializeField] private float playerMaxHealth;
     [SerializeField] private float playerCurrentHealth;
     [SerializeField] private int playerMaxAmmo;
@@ -15,6 +14,12 @@ public class PlayerStatTracker : MonoBehaviour
     [SerializeField] private float playerRegen;
     [SerializeField] private float playerJumpHeight;
     [SerializeField] private float playerReload;
+
+    private void Awake()
+    {
+        MenuManager.Instance.SetStatTracker(this);
+        LevelManager.Instance.SetStatTracker(this);
+    }
 
     // HEALTH
     public float PlayerHealth

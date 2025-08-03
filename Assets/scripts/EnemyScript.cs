@@ -1,9 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class EnemyScript : MonoBehaviour
 {
@@ -185,18 +181,25 @@ public class EnemyScript : MonoBehaviour
     // on activation, should start moving in the direction it was assigned
     private void MoveEnemy()
     {
+        if (moveSpeed <= 0f)
+        {
+            Debug.LogWarning("moveSpeed is zero or negative!");
+            return;
+        }
 
         float duration = (Time.time - startTime) / moveSpeed;
 
-        // move direction will be +1 for moving right
-        // move direction will be 0 for standing still
-        // move direction will be -1 for moving left
-        transform.position = new Vector2(Mathf.SmoothStep(
-            objOrigin.x,
-            objOrigin.x + moveLoc, duration),
-            objOrigin.y);
+        float newX = Mathf.SmoothStep(objOrigin.x, objOrigin.x + moveLoc, duration);
 
-        if (transform.position.x == objOrigin.x + moveLoc)
+        if (float.IsNaN(newX))
+        {
+            Debug.LogError("Calculated position is NaN!");
+            return;
+        }
+
+        transform.position = new Vector2(newX, objOrigin.y);
+
+        if (Mathf.Approximately(transform.position.x, objOrigin.x + moveLoc))
         {
             stopped = true;
         }
@@ -227,6 +230,10 @@ public class EnemyScript : MonoBehaviour
         {
             ChangeStateTo(EnemyState.Dazed);
         }
+        if (collision.gameObject.CompareTag("Fist"))
+        {
+            ChangeStateTo(EnemyState.Dead);
+        }
     }
 
     void EnemyDies()
@@ -234,21 +241,21 @@ public class EnemyScript : MonoBehaviour
         // logic for the enemy dying AND flying off the screen. 
         // depending on its state, the enemy will deal damage to the player
     }
-    
+
 }
 
-    // has a STATE value
-        /// 1. Alive and SHooting
-        /// 2. Alive and Net Throwing
-        /// 3. Alive and Stabbing
-        /// 4. Blinded
-        /// 5. Dead
+// has a STATE value
+/// 1. Alive and SHooting
+/// 2. Alive and Net Throwing
+/// 3. Alive and Stabbing
+/// 4. Blinded
+/// 5. Dead
 
-        // On finishing its move, start shooting at the player (wherever they are)
+// On finishing its move, start shooting at the player (wherever they are)
 
-        // On player entering a certain range, try to throw a net at them
+// On player entering a certain range, try to throw a net at them
 
-        // On player entering close range, pull out stun baton and hit the player
+// On player entering close range, pull out stun baton and hit the player
 
-        // Death animation on impact with the player
-    
+// Death animation on impact with the player
+

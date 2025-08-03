@@ -14,6 +14,12 @@ public class PlayerInputHandler : MonoBehaviour
     public event Action JumpPressed;
     public event Action Menu;
     public event Action MenuClose;
+
+    public event Action NavigateUp;    // dla Previous
+    public event Action NavigateDown;  // dla Next
+    public event Action MenuSubmit;    // np. Interact
+    public event Action MenuCancel;    // np. Close
+
     public Vector2 MoveInput { get; private set; }
     public Vector2 LookInput { get; private set; }
     public bool IsJumping { get; private set; }
@@ -27,14 +33,17 @@ public class PlayerInputHandler : MonoBehaviour
         var input = GetComponent<PlayerInput>();
         _map = input.actions.FindActionMap("Player");
 
+        // Ruch i patrzenie
         _map.FindAction("Move").performed += ctx => MoveInput = ctx.ReadValue<Vector2>();
         _map.FindAction("Move").canceled += _ => MoveInput = Vector2.zero;
 
         _map.FindAction("Look").performed += ctx => LookInput = ctx.ReadValue<Vector2>();
         _map.FindAction("Look").canceled += _ => LookInput = Vector2.zero;
 
+        // Skok, sprint, kucanie
         _map.FindAction("Jump").performed += _ => IsJumping = true;
         _map.FindAction("Jump").canceled += _ => IsJumping = false;
+        _map.FindAction("Jump").performed += _ => JumpPressed?.Invoke();
 
         _map.FindAction("Crouch").performed += _ => IsCrouching = true;
         _map.FindAction("Crouch").canceled += _ => IsCrouching = false;
@@ -42,19 +51,7 @@ public class PlayerInputHandler : MonoBehaviour
         _map.FindAction("Sprint").performed += _ => IsSprinting = true;
         _map.FindAction("Sprint").canceled += _ => IsSprinting = false;
 
-        _map.FindAction("Jump").performed += _ =>
-        {
-            JumpPressed?.Invoke();
-        };
-        _map.FindAction("Menu").performed += _ =>
-        {
-            Menu?.Invoke();
-        };
-        _map.FindAction("Close").performed += _ =>
-        {
-            MenuClose?.Invoke();
-        };
-
+        // Atak
         _map.FindAction("Attack").started += _ =>
         {
             IsAttacking = true;
@@ -66,10 +63,12 @@ public class PlayerInputHandler : MonoBehaviour
             AttackReleased?.Invoke();
         };
 
+        // Interakcja
         _map.FindAction("Interact").started += _ =>
         {
             IsInteracting = true;
             InteractPressed?.Invoke();
+            MenuSubmit?.Invoke();
         };
         _map.FindAction("Interact").canceled += _ =>
         {
@@ -77,6 +76,16 @@ public class PlayerInputHandler : MonoBehaviour
             InteractReleased?.Invoke();
         };
 
+        // Menu
+        _map.FindAction("Menu").performed += _ => Menu?.Invoke();
+        _map.FindAction("Close").performed += _ =>
+        {
+            MenuClose?.Invoke();
+            MenuCancel?.Invoke();
+        };
 
+        // Nawigacja menu
+        _map.FindAction("Previous").performed += _ => NavigateUp?.Invoke();
+        _map.FindAction("Next").performed += _ => NavigateDown?.Invoke();
     }
 }

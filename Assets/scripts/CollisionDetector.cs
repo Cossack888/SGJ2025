@@ -15,6 +15,11 @@ public class CollisionDetector : MonoBehaviour
             {
                 playerStatTracker.PlayerHealth -= 100;
             }
+            if (collision.gameObject.CompareTag("BananaBunch"))
+            {
+                playerStatTracker.PlayerAmmo += 1;
+                LevelManager.Instance.GainPoints(1);
+            }
         }
     }
 }

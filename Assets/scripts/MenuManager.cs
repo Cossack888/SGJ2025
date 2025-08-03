@@ -21,7 +21,7 @@ public class MenuManager : MonoBehaviour
     public GameObject ActiveMenu;
     public static MenuManager Instance { get; private set; }
 
-    public int currentIndex = 0;
+    private int currentIndex = 0;
     private PlayerInputHandler input;
     public List<Button> activeButtonList;
     public Button buttonActive;
@@ -49,12 +49,11 @@ public class MenuManager : MonoBehaviour
 
     private void OnDisable()
     {
-        if (input != null)
-        {
-            input.NavigateUp -= OnNavigateUp;
-            input.NavigateDown -= OnNavigateDown;
-            input.MenuSubmit -= OnSubmit;
-        }
+        if (input == null) return;
+
+        input.NavigateUp -= OnNavigateUp;
+        input.NavigateDown -= OnNavigateDown;
+        input.MenuSubmit -= OnSubmit;
     }
 
     public void SetStatTracker(PlayerStatTracker statTracker)
@@ -65,12 +64,6 @@ public class MenuManager : MonoBehaviour
 
     public void AssignControllingInput(PlayerInputHandler playerInput)
     {
-        if (input != null)
-        {
-            input.NavigateUp -= OnNavigateUp;
-            input.NavigateDown -= OnNavigateDown;
-            input.MenuSubmit -= OnSubmit;
-        }
 
         input = playerInput;
         input.NavigateUp += OnNavigateUp;
@@ -79,6 +72,8 @@ public class MenuManager : MonoBehaviour
 
         currentIndex = 0;
         HighlightCurrentButton();
+
+
     }
 
     // === PANEL SWITCHING ===
@@ -87,7 +82,7 @@ public class MenuManager : MonoBehaviour
 
         CloseAllPanels();
         ActiveMenu = null;
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
         switch (panelName.ToLower())
         {
             case "menu":
@@ -157,9 +152,6 @@ public class MenuManager : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
         Button button = activeButtonList[currentIndex];
         buttonActive = button;
-
-        Debug.Log($"Selecting button: {button.name}, interactable: {button.interactable}");
-
         button.Select();
         if (button.image != null)
             button.image.color = Color.red;

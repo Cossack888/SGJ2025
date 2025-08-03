@@ -102,8 +102,16 @@ public class EnemyScript : MonoBehaviour
                     InvokeRepeating("Shooting", 0.5f, shootingSpeed);
                     shooting = true;
                 }
+
+            }
+            else
+            {
+                CancelInvoke("Shooting");
+                shooting = false;
             }
         }
+
+        
     }
 
     public void ChangeStateTo(EnemyState state)
@@ -117,7 +125,6 @@ public class EnemyScript : MonoBehaviour
         else if (state == EnemyState.Dead)
         {
             enemyState = EnemyState.Dead;
-
             EnemyDies(true);
         }
     }

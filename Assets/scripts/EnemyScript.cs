@@ -10,7 +10,7 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] private GameObject dart;
     [SerializeField] private GameObject net;
     [SerializeField] private float netForce;
-    [SerializeField] private bool netLoaded = false;
+    [SerializeField] private bool netLoaded = true;
     [SerializeField] private GameObject baton;
     [SerializeField] private float contactDmg;
     [SerializeField] private float contactDmgMult;
@@ -79,7 +79,7 @@ public class EnemyScript : MonoBehaviour
                 }
                 BattonAttack();
             }
-            else if (distance < 3 && !netLoaded)
+            else if (distance < 3 && netLoaded)
             {
                 if (shooting)
                 {

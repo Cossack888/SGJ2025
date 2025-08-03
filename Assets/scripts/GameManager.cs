@@ -23,6 +23,14 @@ public class GameManager : MonoBehaviour
         // Instantiate the large monkey
         largeMonkeyInstance = Instantiate(largeMonkeyPrefab, transform.position + new Vector3(-2, 0, 0), Quaternion.identity);
 
+        CapsuleCollider2D collider = largeMonkeyInstance.GetComponent<CapsuleCollider2D>();
+        if (collider != null)
+        {
+            collider.offset = new Vector2(0f, 1f);
+            collider.size = new Vector2(1f, 2f);
+            collider.direction = CapsuleDirection2D.Vertical;
+        }
+
         // Find the small monkey as a child of the large monkey (including inactive objects)
         var smallController = largeMonkeyInstance.GetComponentInChildren<SmallMonkeyController>(true);
 

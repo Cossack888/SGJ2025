@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -30,10 +31,19 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] private bool stopped = false;
     bool shooting = false;
 
-    EnemyState enemyState;
+    [SerializeField] EnemyState enemyState;
     EnemyAttackState enemyAttackState;
 
     Vector2 objOrigin;
+
+
+    /// <summary>
+    /// Animation Variables
+    /// </summary>
+    private float maxSize = 8f;
+    private float growFactor = 2f;
+    private float speedFactor = 25f;
+    private float waitTime = 2f;
 
     public void ActivateEnemy(float moveCoord, Vector2 parentOrigin, float speed)
     {
@@ -54,43 +64,44 @@ public class EnemyScript : MonoBehaviour
 
         players = FindObjectsByType<PlayerStatTracker>(FindObjectsSortMode.None);
 
-
-
         enemyState = EnemyState.Alive;
         enemyAttackState = EnemyAttackState.Shooting;
     }
 
     void Update()
     {
-        if (!stopped)
+        if (!stopped && enemyState == EnemyState.Alive)
         {
             MoveEnemy();
         }
         else
         {
-            player = TargetPlayer(players);
-            float distance = Vector2.Distance(player.transform.position, transform.position);
+            if (enemyState == EnemyState.Alive)
+            {
+                player = TargetPlayer(players);
+                float distance = Vector2.Distance(player.transform.position, transform.position);
 
-            if (distance < 1)
-            {
-                if (shooting)
+                if (distance < 1)
                 {
-                    CancelInvoke("Shooting");
+                    if (shooting)
+                    {
+                        CancelInvoke("Shooting");
+                    }
+                    BattonAttack();
                 }
-                BattonAttack();
-            }
-            else if (distance < 3 && netLoaded)
-            {
-                if (shooting)
+                else if (distance < 3 && netLoaded)
                 {
-                    CancelInvoke("Shooting");
+                    if (shooting)
+                    {
+                        CancelInvoke("Shooting");
+                    }
+                    ThrowNet();
                 }
-                ThrowNet();
-            }
-            else if (distance >= 3 && !shooting)
-            {
-                InvokeRepeating("Shooting", 0.5f, shootingSpeed);
-                shooting = true;
+                else if (distance >= 3 && !shooting)
+                {
+                    InvokeRepeating("Shooting", 0.5f, shootingSpeed);
+                    shooting = true;
+                }
             }
         }
     }
@@ -107,9 +118,7 @@ public class EnemyScript : MonoBehaviour
         {
             enemyState = EnemyState.Dead;
 
-            EnemyDies();
-
-            gameObject.SetActive(false);
+            EnemyDies(true);
         }
     }
 
@@ -244,11 +253,64 @@ public class EnemyScript : MonoBehaviour
 
     }
 
-    void EnemyDies()
+    public void EnemyDies(bool hitByBigMonkey)
     {
-        // logic for the enemy dying AND flying off the screen. 
-        // depending on its state, the enemy will deal damage to the player
+        
+
+        if (hitByBigMonkey)
+        {
+            StartCoroutine("DeathAnim");
+        }
+
     }
+
+    IEnumerator DeathAnim()
+    {
+        float timer = 0;
+
+        BoxCollider2D[] colls = gameObject.GetComponents<BoxCollider2D>();
+
+        foreach (BoxCollider2D c in colls)
+        {
+            c.enabled = false;
+        }
+
+        Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
+
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        rb.AddForce(new Vector2(0f, 600f));
+
+        while (enemyState == EnemyState.Dead) // this could also be a condition indicating "alive or dead"
+        {
+            // we scale all axis, so they will have the same value, 
+            // so we can work with a float instead of comparing vectors
+            while (maxSize > transform.localScale.x)
+            {
+                timer += Time.deltaTime;
+                transform.localScale += new Vector3(1, 1, 1) * Time.deltaTime * growFactor;
+                transform.Rotate(new Vector3(0, 0, Time.deltaTime * speedFactor));
+                yield return null;
+            }
+            // reset the timer
+
+            yield return new WaitForSeconds(waitTime);
+
+            gameObject.SetActive(false);
+
+            /*
+            timer = 0;
+            while (1 < transform.localScale.x)
+            {
+                timer += Time.deltaTime;
+                transform.localScale -= new Vector3(1, 1, 1) * Time.deltaTime * growFactor;
+                transform.Rotate(new Vector3(0, 0, Time.deltaTime * speedFactor));
+                yield return null;
+            }
+
+            timer = 0;
+            yield return new WaitForSeconds(waitTime);*/
+        }
+    }   
 
 }
 

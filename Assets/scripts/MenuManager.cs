@@ -49,9 +49,12 @@ public class MenuManager : MonoBehaviour
 
     private void OnDisable()
     {
-        input.NavigateUp -= OnNavigateUp;
-        input.NavigateDown -= OnNavigateDown;
-        input.MenuSubmit -= OnSubmit;
+        if (input != null)
+        {
+            input.NavigateUp -= OnNavigateUp;
+            input.NavigateDown -= OnNavigateDown;
+            input.MenuSubmit -= OnSubmit;
+        }
     }
 
     public void SetStatTracker(PlayerStatTracker statTracker)

@@ -200,11 +200,13 @@ MonoBehaviour:
   netForce: 7
   netLoaded: 0
   baton: {fileID: 0}
-  contactDmg: 5
+  contactDmg: 0
   contactDmgMult: 2
+  VFX: {fileID: 0}
   shootingSpeed: 2
   players: []
   allDarts: []
+  stopped: 0
 --- !u!1001 &2918342412658379371
 PrefabInstance:
   m_ObjectHideFlags: 0

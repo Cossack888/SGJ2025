@@ -346,6 +346,10 @@ MonoBehaviour:
     m_ActionName: 'UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
   - m_PersistentCalls:
       m_Calls: []
+    m_ActionId: 7607c7b6-cd76-4816-beef-bd0341cfe950
+    m_ActionName: 'UI/Submit[/Keyboard/enter]'
+  - m_PersistentCalls:
+      m_Calls: []
     m_ActionId: 15cef263-9014-4fd5-94d9-4e4a6234a6ef
     m_ActionName: 'UI/Cancel[/Keyboard/escape]'
   - m_PersistentCalls:
@@ -376,30 +380,6 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: fea2999c-a26b-4c27-9c72-4fa3af6a47e8
-    m_ActionName: 'Player/Menu[/Keyboard/escape]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 2133cc39-c62e-4e49-be89-5e940415c57a
-    m_ActionName: 'Player/Close[/Keyboard/escape]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 1a6108da-d450-4ef1-a616-c1c2f2284b6b
-    m_ActionName: 'Player/PressA[/Keyboard/s]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: d5b6fd94-02da-4d29-913a-00954f8f2b95
-    m_ActionName: 'Player/PressB[/Keyboard/d]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: feee287b-be2a-4a42-ad35-ca9c20a458cc
-    m_ActionName: 'Player/PressX[/Keyboard/a]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 95a51a6b-45f5-47f1-8fdd-01d1ce7b0eeb
-    m_ActionName: 'Player/PressY[/Keyboard/w]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -452,8 +432,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 243ec0be01760ac46892f26c09bad3ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMaxHealth: 100111
-  playerCurrentHealth: 100111
+  playerMaxHealth: 35
+  playerCurrentHealth: 35
   playerMaxAmmo: 20
   playerCurrentAmmo: 5
   playerMaxSpeed: 0

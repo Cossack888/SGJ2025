@@ -24,7 +24,7 @@ public class LevelManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
     }
-    public void UpdateUI()
+    private void UpdateUI()
     {
         pointsText.text = points.ToString();
         healthText.text = playerStatTracker.PlayerHealth.ToString();
@@ -50,8 +50,12 @@ public class LevelManager : MonoBehaviour
 
     public void OpenMenu()
     {
-        //Menu.SetActive(true);
-        MenuManager.Instance.SetActivePanel("menu");
+        if (MenuManager.Instance.ActiveMenu == null)
+        {
+            Menu.SetActive(true);
+            MenuManager.Instance.SetActivePanel("menu");
+        }
+
     }
     public void CloseMenu()
     {
@@ -59,9 +63,6 @@ public class LevelManager : MonoBehaviour
         {
             MenuManager.Instance.CloseAllPanels();
             Time.timeScale = 1f;
-
-            MenuManager.Instance.activeButtonList = null; // resetuj listê
-            MenuManager.Instance.currentIndex = 0;
         }
     }
 }

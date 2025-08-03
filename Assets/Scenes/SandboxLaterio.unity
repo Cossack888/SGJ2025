@@ -20983,6 +20983,7 @@ MonoBehaviour:
   UI: {fileID: 698449396}
   timeBetweenPrompts: 2
   scoreToWin: 7
+  gameActive: 0
 --- !u!1 &476098894
 GameObject:
   m_ObjectHideFlags: 0
@@ -24143,6 +24144,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5353739898075433112, guid: 680063039802763408b77ce315bfaeff, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6417401123407987952, guid: 680063039802763408b77ce315bfaeff, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6417401123407987952, guid: 680063039802763408b77ce315bfaeff, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6417401123407987952, guid: 680063039802763408b77ce315bfaeff, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6417401123407987952, guid: 680063039802763408b77ce315bfaeff, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7695207050321571900, guid: 680063039802763408b77ce315bfaeff, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7695207050321571900, guid: 680063039802763408b77ce315bfaeff, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7695207050321571900, guid: 680063039802763408b77ce315bfaeff, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7695207050321571900, guid: 680063039802763408b77ce315bfaeff, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

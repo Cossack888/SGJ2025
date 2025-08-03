@@ -50,12 +50,8 @@ public class LevelManager : MonoBehaviour
 
     public void OpenMenu()
     {
-        if (MenuManager.Instance.ActiveMenu == null)
-        {
-            Menu.SetActive(true);
-            MenuManager.Instance.SetActivePanel("menu");
-        }
-
+        //Menu.SetActive(true);
+        MenuManager.Instance.SetActivePanel("menu");
     }
     public void CloseMenu()
     {
@@ -63,6 +59,9 @@ public class LevelManager : MonoBehaviour
         {
             MenuManager.Instance.CloseAllPanels();
             Time.timeScale = 1f;
+
+            MenuManager.Instance.activeButtonList = null; // resetuj listê
+            MenuManager.Instance.currentIndex = 0;
         }
     }
 }

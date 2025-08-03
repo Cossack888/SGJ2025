@@ -24,7 +24,11 @@ public class CollisionDetector : MonoBehaviour
             }
             if (collision.gameObject.CompareTag("BananaBunch"))
             {
-                playerStatTracker.PlayerAmmo += 1;
+                BananaBunchScript bunchScript = collision.GetComponent<BananaBunchScript>();
+                if (bunchScript != null)
+                {
+                    playerStatTracker.PlayerHealth += bunchScript.healthNum;
+                }
                 LevelManager.Instance.GainPoints(1);
             }
             if (collision.gameObject.CompareTag("Net"))

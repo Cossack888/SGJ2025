@@ -108,11 +108,13 @@ public class MenuManager : MonoBehaviour
             case "death":
                 activeButtonList = deathMenuButtons;
                 deathMenu.SetActive(true);
+                deathMenu.GetComponent<DeathScreen>().Init();
                 ActiveMenu = deathMenu;
                 break;
             case "win":
                 activeButtonList = winMenuButtons;
                 winMenu.SetActive(true);
+                winMenu.GetComponent<WinScreen>().Init();
                 ActiveMenu = winMenu;
                 break;
             default:
@@ -190,4 +192,6 @@ public class MenuManager : MonoBehaviour
     {
         SetActivePanel("win");
     }
+
+
 }

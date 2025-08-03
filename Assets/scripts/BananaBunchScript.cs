@@ -6,7 +6,7 @@ public class BananaBunchScript : MonoBehaviour
     [SerializeField] private CapsuleCollider2D capCol2d;
 
     [SerializeField] private int ammoNum;
-    [SerializeField] private float healthNum;
+    public float healthNum;
 
     void Start()
     {
@@ -44,14 +44,5 @@ public class BananaBunchScript : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha8))
-        {
-            rb2d.bodyType = RigidbodyType2D.Dynamic;
-            capCol2d.isTrigger = false;
-        }
-    }
 
-    
 }

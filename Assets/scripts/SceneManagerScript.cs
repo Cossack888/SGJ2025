@@ -1,8 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System.Collections;
-using JetBrains.Annotations;
 
 public class SceneManagerScript : MonoBehaviour
 {
@@ -14,6 +11,8 @@ public class SceneManagerScript : MonoBehaviour
     {
         // Only specifying the sceneName or sceneBuildIndex will load the Scene with the Single mode
         SceneManager.LoadScene(levelName);
+        Time.timeScale = 1f;
+        MenuManager.Instance.CloseAllPanels();
     }
 
     public void QuitGame()

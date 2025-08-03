@@ -31,7 +31,7 @@ public class LevelManager : MonoBehaviour
         SplashScreen.SetActive(true);
     }
 
-    private void UpdateUI()
+    public void UpdateUI()
     {
         pointsText.text = points.ToString();
         healthText.text = playerStatTracker.PlayerHealth.ToString();

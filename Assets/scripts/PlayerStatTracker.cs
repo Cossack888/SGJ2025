@@ -30,6 +30,7 @@ public class PlayerStatTracker : MonoBehaviour
         {
             playerCurrentHealth = value;
             playerCurrentHealth = Mathf.Clamp(playerCurrentHealth, 0f, ResetHealth);
+            LevelManager.Instance.UpdateUI();
             CheckHealth();
         }
     }

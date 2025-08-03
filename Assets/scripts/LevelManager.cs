@@ -9,7 +9,7 @@ public class LevelManager : MonoBehaviour
     public PlayerStatTracker playerStatTracker;
     public int points;
     public TMP_Text pointsText;
-
+    public TMP_Text healthText;
 
     private void Awake()
     {
@@ -22,11 +22,12 @@ public class LevelManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        UpdateUI();
+
     }
     private void UpdateUI()
     {
         pointsText.text = points.ToString();
+        healthText.text = playerStatTracker.PlayerHealth.ToString();
     }
 
     public void GainPoints(int point)
@@ -37,6 +38,7 @@ public class LevelManager : MonoBehaviour
     public void SetStatTracker(PlayerStatTracker statTracker)
     {
         playerStatTracker = statTracker;
+        UpdateUI();
     }
 
 

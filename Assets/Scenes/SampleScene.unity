@@ -2693,6 +2693,17 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 492977781977765992, guid: 722ab365daebb9e48aea3f54ea71c4e8, type: 3}
   m_PrefabInstance: {fileID: 1701645762}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1755702150 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6442522157327694639, guid: 680063039802763408b77ce315bfaeff, type: 3}
+  m_PrefabInstance: {fileID: 1802834683040375465}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1877036177
 GameObject:
   m_ObjectHideFlags: 0
@@ -5086,6 +5097,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5949180650894627467}
     - target: {fileID: 7113795305627758411, guid: f0884940e44d4234392c042be3a614a8, type: 3}
+      propertyPath: healthText
+      value: 
+      objectReference: {fileID: 1755702150}
+    - target: {fileID: 7113795305627758411, guid: f0884940e44d4234392c042be3a614a8, type: 3}
       propertyPath: pointsText
       value: 
       objectReference: {fileID: 439608528}
@@ -5105,6 +5120,14 @@ PrefabInstance:
     - target: {fileID: 1085166350920498259, guid: 680063039802763408b77ce315bfaeff, type: 3}
       propertyPath: m_Name
       value: menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 4354756957347210880, guid: 680063039802763408b77ce315bfaeff, type: 3}
+      propertyPath: m_Name
+      value: HEalth
+      objectReference: {fileID: 0}
+    - target: {fileID: 4835672546267982534, guid: 680063039802763408b77ce315bfaeff, type: 3}
+      propertyPath: m_Name
+      value: Points
       objectReference: {fileID: 0}
     - target: {fileID: 5353739898075433112, guid: 680063039802763408b77ce315bfaeff, type: 3}
       propertyPath: m_LocalPosition.x

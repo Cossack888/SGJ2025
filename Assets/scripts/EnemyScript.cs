@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
@@ -19,8 +20,7 @@ public class EnemyScript : MonoBehaviour
 
     [SerializeField] private PlayerStatTracker[] players;
     private Transform player;
-    private bool canDamage = true;
-    public float damageCooldown = 1f;
+
     [SerializeField] private List<DartScript> allDarts = new List<DartScript>();
 
     public enum EnemyState { Alive, Dazed, Dead };
@@ -221,31 +221,22 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!canDamage) return;
+        Debug.Log("Collided with " + collision.gameObject.name);
 
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.tag == "Player")
         {
-            Debug.Log("Collided with " + collision.gameObject.name);
-
-            canDamage = false;
-            Invoke(nameof(ResetDamage), damageCooldown);
-
             ChangeStateTo(EnemyState.Dead);
 
             if (enemyState == EnemyState.Dazed)
             {
+                // If enemy is already dazed, half damage
                 contactDmgMult = contactDmgMult / 2;
             }
 
             collision.gameObject.GetComponent<PlayerStatTracker>().PlayerHealth -= contactDmg * contactDmgMult;
         }
-    }
-
-    private void ResetDamage()
-    {
-        canDamage = true;
     }
 
     void OnTriggerEnter2D(Collider2D collision)

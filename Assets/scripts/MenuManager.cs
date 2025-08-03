@@ -64,6 +64,12 @@ public class MenuManager : MonoBehaviour
 
     public void AssignControllingInput(PlayerInputHandler playerInput)
     {
+        if (input != null)
+        {
+            input.NavigateUp -= OnNavigateUp;
+            input.NavigateDown -= OnNavigateDown;
+            input.MenuSubmit -= OnSubmit;
+        }
 
         input = playerInput;
         input.NavigateUp += OnNavigateUp;
@@ -72,8 +78,6 @@ public class MenuManager : MonoBehaviour
 
         currentIndex = 0;
         HighlightCurrentButton();
-
-
     }
 
     // === PANEL SWITCHING ===

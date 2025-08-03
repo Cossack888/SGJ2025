@@ -56,11 +56,10 @@ public class LevelManager : MonoBehaviour
 
     public void OpenMenu()
     {
-        if (MenuManager.Instance.ActiveMenu == null)
-        {
-            Menu.SetActive(true);
-            MenuManager.Instance.SetActivePanel("menu");
-        }
+
+        Menu.SetActive(true);
+        MenuManager.Instance.SetActivePanel("menu");
+
 
     }
     public void CloseMenu()

@@ -12,8 +12,8 @@ public class SmallMonkeyController : MonkeyControllerBase
 
     [Header("Trajectory")]
     public LineRenderer trajectoryRenderer;
-    public int trajectoryPoints = 30;
-    public float trajectoryTimeStep = 0.1f;
+    public int trajectoryPoints = 15;
+    public float trajectoryTimeStep = 0.05f;
     public Transform bigMonkey;
     private float lastThrowTime;
     private bool isCharging;
@@ -36,6 +36,8 @@ public class SmallMonkeyController : MonkeyControllerBase
 
     protected override void Update()
     {
+        base.Update();
+
         if (isCharging)
         {
             float heldTime = Mathf.Clamp(Time.time - chargeStartTime, 0f, maxChargeTime);
@@ -100,8 +102,8 @@ public class SmallMonkeyController : MonkeyControllerBase
     private void ThrowBanana(float force)
     {
         lastThrowTime = Time.time;
-
-        GameObject banana = Instantiate(bananaPrefab, throwPoint.position, Quaternion.identity);
+        GameObject banana = ObjectPooler.Instance.SpawnFromPool("Banana", throwPoint.position, Quaternion.identity);
+        banana.GetComponent<PlayerProjectile>().SetOwner(gameObject);
         banana.GetComponent<Rigidbody2D>().linearVelocity = lastValidAimDirection * force;
     }
 
@@ -110,14 +112,17 @@ public class SmallMonkeyController : MonkeyControllerBase
         if (bananaPrefab == null || trajectoryRenderer == null || throwPoint == null)
             return;
 
+        trajectoryRenderer.enabled = true;
         trajectoryRenderer.useWorldSpace = true;
         trajectoryRenderer.positionCount = trajectoryPoints;
 
         Vector3[] points = new Vector3[trajectoryPoints];
         Vector3 startPos = throwPoint.position;
 
-        float gravityScale = bananaPrefab.GetComponent<Rigidbody2D>()?.gravityScale ?? 1f;
+        Rigidbody2D bananaRB = bananaPrefab.GetComponent<Rigidbody2D>();
+        float gravityScale = bananaRB != null ? bananaRB.gravityScale : 1f;
         Vector2 gravity = Physics2D.gravity * gravityScale;
+
         Vector2 velocity = direction.normalized * customForce;
 
         for (int i = 0; i < trajectoryPoints; i++)

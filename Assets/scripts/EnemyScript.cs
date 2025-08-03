@@ -21,7 +21,7 @@ public class EnemyScript : MonoBehaviour
 
     [SerializeField] private List<DartScript> allDarts = new List<DartScript>();
 
-    private enum EnemyState { Alive, Dazed, Dead };
+    public enum EnemyState { Alive, Dazed, Dead };
     private enum EnemyAttackState { Shooting, Throwing };
 
     // time in game from the moment the spawner is triggered
@@ -93,7 +93,7 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    void ChangeStateTo(EnemyState state)
+    public void ChangeStateTo(EnemyState state)
     {
 
         if (state == EnemyState.Dazed)
@@ -225,15 +225,16 @@ public class EnemyScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        // once hit by a banana logic
-        if (collision.gameObject.tag == "Banana")
+
+        if (enemyState == EnemyState.Dazed)
         {
-            ChangeStateTo(EnemyState.Dazed);
+            if (collision.gameObject.CompareTag("Fist"))
+            {
+                Debug.Log("EnemyDead");
+                ChangeStateTo(EnemyState.Dead);
+            }
         }
-        if (collision.gameObject.CompareTag("Fist"))
-        {
-            ChangeStateTo(EnemyState.Dead);
-        }
+
     }
 
     void EnemyDies()

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObjectPooler : MonoBehaviour
@@ -15,11 +14,24 @@ public class ObjectPooler : MonoBehaviour
     public List<Pool> pools;
     public Transform poolParent;
 
+    public static ObjectPooler Instance { get; private set; }
+
     private Dictionary<string, Queue<GameObject>> poolDictionary;
+    private Dictionary<GameObject, string> objectToTagMap; // NEW
 
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
+        objectToTagMap = new Dictionary<GameObject, string>();
 
         foreach (Pool pool in pools)
         {
@@ -30,13 +42,11 @@ public class ObjectPooler : MonoBehaviour
                 GameObject obj = Instantiate(pool.prefab, poolParent);
                 obj.SetActive(false);
 
-                if (obj.TryGetComponent<IPoolable>(out var p))
-                    p.ReturnToPool();
-
                 objectPool.Enqueue(obj);
+                objectToTagMap[obj] = pool.tag;
             }
 
-            poolDictionary.Add(pool.tag, objectPool);
+            poolDictionary[pool.tag] = objectPool;
         }
     }
 
@@ -48,18 +58,12 @@ public class ObjectPooler : MonoBehaviour
             return null;
         }
 
-        GameObject obj = poolDictionary[tag].Dequeue();
+        Queue<GameObject> queue = poolDictionary[tag];
+        GameObject obj = queue.Dequeue();
 
         obj.transform.position = position;
         obj.transform.rotation = rotation;
         obj.SetActive(true);
-
-        if (obj.TryGetComponent<IPoolable>(out var poolable))
-        {
-            poolable.ReturnToPool();
-        }
-
-        poolDictionary[tag].Enqueue(obj);
 
         return obj;
     }
@@ -67,5 +71,14 @@ public class ObjectPooler : MonoBehaviour
     public void ReturnToPool(GameObject obj)
     {
         obj.SetActive(false);
+
+        if (objectToTagMap.TryGetValue(obj, out var tag))
+        {
+            poolDictionary[tag].Enqueue(obj);
+        }
+        else
+        {
+            Debug.LogWarning($"Trying to return an object not tracked by ObjectPooler: {obj.name}");
+        }
     }
 }

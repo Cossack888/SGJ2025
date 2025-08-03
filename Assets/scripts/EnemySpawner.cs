@@ -60,8 +60,10 @@ public class EnemySpawner : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+
+        Debug.Log("Collision happened with " + collision.gameObject.name);
         // Only trigger the trigger, if you're not already spawning and not finished
-        if (collision.name == "TBD ENEMY SPAWN TRIGGER" && !isSpawning && !hasFinishedSpawning)
+        if (collision.gameObject.tag == "MainCamera" && !isSpawning && !hasFinishedSpawning)
         {
             ActivateSpawner();
             // start spawning after X amount of time

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MinigameController : MonoBehaviour
 {
-    public enum ButtonType { dó³, prawo, lewo, góra }
+    public enum ButtonType { down, right, left, up }
 
     [Header("Players")]
     public PlayerInputHandler player1;
@@ -60,10 +60,10 @@ public class MinigameController : MonoBehaviour
     {
         if (input == player1)
         {
-            pressA1 = () => OnButtonPressed(ButtonType.dó³, input);
-            pressB1 = () => OnButtonPressed(ButtonType.prawo, input);
-            pressX1 = () => OnButtonPressed(ButtonType.lewo, input);
-            pressY1 = () => OnButtonPressed(ButtonType.góra, input);
+            pressA1 = () => OnButtonPressed(ButtonType.down, input);
+            pressB1 = () => OnButtonPressed(ButtonType.right, input);
+            pressX1 = () => OnButtonPressed(ButtonType.left, input);
+            pressY1 = () => OnButtonPressed(ButtonType.up, input);
 
             input.PressA += pressA1;
             input.PressB += pressB1;
@@ -72,10 +72,10 @@ public class MinigameController : MonoBehaviour
         }
         else if (input == player2)
         {
-            pressA2 = () => OnButtonPressed(ButtonType.dó³, input);
-            pressB2 = () => OnButtonPressed(ButtonType.prawo, input);
-            pressX2 = () => OnButtonPressed(ButtonType.lewo, input);
-            pressY2 = () => OnButtonPressed(ButtonType.góra, input);
+            pressA2 = () => OnButtonPressed(ButtonType.down, input);
+            pressB2 = () => OnButtonPressed(ButtonType.right, input);
+            pressX2 = () => OnButtonPressed(ButtonType.left, input);
+            pressY2 = () => OnButtonPressed(ButtonType.up, input);
 
             input.PressA += pressA2;
             input.PressB += pressB2;
@@ -142,7 +142,7 @@ public class MinigameController : MonoBehaviour
         yield return new WaitForSeconds(timeBetweenPrompts);
 
         currentPrompt = (ButtonType)UnityEngine.Random.Range(0, 4);
-        promptText.text = $"Naciœnij {currentPrompt}";
+        promptText.text = $"Naciï¿½nij {currentPrompt}";
     }
 
     private void UpdateUI()

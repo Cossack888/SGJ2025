@@ -201,14 +201,13 @@ MonoBehaviour:
   netForce: 7
   netLoaded: 0
   baton: {fileID: 0}
-  contactDmg: 0
+  contactDmg: 5
   contactDmgMult: 2
   VFX: {fileID: 0}
   shootingSpeed: 2
   players: []
   allDarts: []
   stopped: 0
-<<<<<<< HEAD
   enemyState: 0
 --- !u!50 &4291998552960306675
 Rigidbody2D:
@@ -237,8 +236,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
-=======
->>>>>>> d4385bb95ab3b4238696c75655dacbe8897f3fda
 --- !u!1001 &2918342412658379371
 PrefabInstance:
   m_ObjectHideFlags: 0

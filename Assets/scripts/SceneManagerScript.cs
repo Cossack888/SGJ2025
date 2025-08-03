@@ -9,6 +9,7 @@ public class SceneManagerScript : MonoBehaviour
     [SerializeField] private Canvas CreditsCanvas;
     public void ChangeScene(string levelName)
     {
+
         // Only specifying the sceneName or sceneBuildIndex will load the Scene with the Single mode
         SceneManager.LoadScene(levelName);
         Time.timeScale = 1f;

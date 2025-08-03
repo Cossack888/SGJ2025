@@ -82,7 +82,7 @@ public class MenuManager : MonoBehaviour
 
         CloseAllPanels();
         ActiveMenu = null;
-        //Time.timeScale = 0f;
+        Time.timeScale = 0f;
         switch (panelName.ToLower())
         {
             case "menu":
@@ -146,7 +146,7 @@ public class MenuManager : MonoBehaviour
         foreach (Button b in activeButtonList)
         {
             if (b != null && b.image != null)
-                b.image.color = Color.white;
+                b.image.color = new Color(0f, 0f, 0f, 0.2f); ;
         }
 
         EventSystem.current.SetSelectedGameObject(null);
@@ -154,7 +154,7 @@ public class MenuManager : MonoBehaviour
         buttonActive = button;
         button.Select();
         if (button.image != null)
-            button.image.color = Color.red;
+            button.image.color = new Color(1f, 0f, 0f, 0.2f);
     }
 
     private void OnSubmit()

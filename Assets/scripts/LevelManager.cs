@@ -10,10 +10,10 @@ public class LevelManager : MonoBehaviour
     public int points;
     public TMP_Text pointsText;
     public TMP_Text healthText;
+    public GameObject SplashScreen;
 
     private void Awake()
     {
-        Time.timeScale = 1f;
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -24,12 +24,25 @@ public class LevelManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
     }
+
+    private void Start()
+    {
+        Time.timeScale = 0f;
+        SplashScreen.SetActive(true);
+    }
+
     private void UpdateUI()
     {
         pointsText.text = points.ToString();
         healthText.text = playerStatTracker.PlayerHealth.ToString();
     }
-
+    public void StartGame()
+    {
+        Time.timeScale = 1f;
+        SplashScreen.SetActive(false);
+        FireWallMover fireWallMover = FindAnyObjectByType<FireWallMover>();
+        fireWallMover.isActive = true;
+    }
     public void GainPoints(int point)
     {
         points += point;
@@ -39,13 +52,6 @@ public class LevelManager : MonoBehaviour
     {
         playerStatTracker = statTracker;
         UpdateUI();
-    }
-
-
-    private void Start()
-    {
-        if (Menu != null)
-            CloseMenu();
     }
 
     public void OpenMenu()

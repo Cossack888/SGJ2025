@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour
 
         cam.SetTarget(input.transform);
         Debug.Log("Player 1 controls the large monkey (" + controlScheme + ")");
+        MenuManager.Instance.AssignControllingInput(input.GetComponent<PlayerInputHandler>());
     }
 
     private void AssignSmallMonkeyToDevice(InputDevice device, string controlScheme)
@@ -107,5 +108,10 @@ public class GameManager : MonoBehaviour
         player2Assigned = true;
 
         Debug.Log("Player 2 controls the small monkey (" + controlScheme + ")");
+        MenuManager.Instance.AssignControllingInput(input.GetComponent<PlayerInputHandler>());
+        if (player1Assigned && player2Assigned && LevelManager.Instance != null)
+        {
+            LevelManager.Instance.StartGame();
+        }
     }
 }

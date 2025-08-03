@@ -46,10 +46,17 @@ public class MinigameController : MonoBehaviour
         UI.SetActive(true);
         RegisterEvents(player1);
         RegisterEvents(player2);
-        StartCoroutine(NextPromptRoutine());
-
+        currentScore = 0;
+        UpdateUI();
+        SetNextPrompt();
     }
-
+    private void SetNextPrompt()
+    {
+        p1Pressed = false;
+        p2Pressed = false;
+        currentPrompt = (ButtonType)UnityEngine.Random.Range(0, 4);
+        promptText.text = $"Naciœnij {currentPrompt}";
+    }
     private void OnDisable()
     {
         UnregisterEvents(player1);
@@ -125,11 +132,10 @@ public class MinigameController : MonoBehaviour
                 player1.ReleasefromNet();
                 player2.ReleasefromNet();
                 UI.SetActive(false);
-                StopAllCoroutines();
             }
             else
             {
-                StartCoroutine(NextPromptRoutine());
+                SetNextPrompt(); // natychmiast nowe has³o
             }
         }
     }

@@ -3,9 +3,16 @@ using UnityEngine;
 public class CollisionDetector : MonoBehaviour
 {
     PlayerStatTracker playerStatTracker;
+    BigMonkeyController bigMonkeyController;
+    SmallMonkeyController smallMonkeyController;
+    MinigameController minigameController;
     private void Start()
     {
         playerStatTracker = GetComponent<PlayerStatTracker>();
+        bigMonkeyController = GetComponentInChildren<BigMonkeyController>();
+        smallMonkeyController = GetComponentInChildren<SmallMonkeyController>();
+        minigameController = FindFirstObjectByType<MinigameController>();
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -20,6 +27,21 @@ public class CollisionDetector : MonoBehaviour
                 playerStatTracker.PlayerAmmo += 1;
                 LevelManager.Instance.GainPoints(1);
             }
+            if (collision.gameObject.CompareTag("Net"))
+            {
+                bigMonkeyController.SetFree(false);
+                smallMonkeyController.SetFree(false);
+
+            }
+        }
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            bigMonkeyController.SetFree(false);
+            smallMonkeyController.SetFree(false);
+            minigameController.ActivateGame();
         }
     }
 }

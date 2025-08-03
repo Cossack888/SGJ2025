@@ -19,7 +19,11 @@ public class PlayerInputHandler : MonoBehaviour
     public event Action NavigateDown;  // dla Next
     public event Action MenuSubmit;    // np. Interact
     public event Action MenuCancel;    // np. Close
-
+    public event Action PressA;
+    public event Action PressB;
+    public event Action PressX;
+    public event Action PressY;
+    public event Action<bool> ReleaseFromNet;
     public Vector2 MoveInput { get; private set; }
     public Vector2 LookInput { get; private set; }
     public bool IsJumping { get; private set; }
@@ -87,5 +91,14 @@ public class PlayerInputHandler : MonoBehaviour
         // Nawigacja menu
         _map.FindAction("Previous").performed += _ => NavigateUp?.Invoke();
         _map.FindAction("Next").performed += _ => NavigateDown?.Invoke();
+
+        _map.FindAction("PressA").performed += _ => PressA?.Invoke();
+        _map.FindAction("PressB").performed += _ => PressB?.Invoke();
+        _map.FindAction("PressX").performed += _ => PressX?.Invoke();
+        _map.FindAction("PressY").performed += _ => PressY?.Invoke();
+    }
+    public void ReleasefromNet()
+    {
+        ReleaseFromNet?.Invoke(true);
     }
 }

@@ -28,7 +28,7 @@ public class BigMonkeyController : MonoBehaviour
     private bool isLedge = false;
     private Collider2D currentClimbTarget;
     private Bounds climbBounds;
-
+    private bool free = true;
     public bool jumpFromLedge;
     private float jumpFromLedgeTimer = 0f;
 
@@ -42,45 +42,54 @@ public class BigMonkeyController : MonoBehaviour
         inputHandler.JumpPressed += Jump;
         inputHandler.Menu += MenuOpen;
         inputHandler.MenuClose += MenuClose;
-
+        inputHandler.ReleaseFromNet += SetFree;
     }
-
+    public void SetFree(bool state)
+    {
+        free = state;
+    }
     private void Update()
     {
-        HandleFlip();
-
-        if (inputHandler.IsAttacking)
-            Attack();
-
-        if (inputHandler.IsInteracting)
-            Interact();
-
-        if (jumpFromLedge)
+        if (free)
         {
-            jumpFromLedgeTimer += Time.deltaTime;
-            if (jumpFromLedgeTimer > 1f)
+            HandleFlip();
+
+            if (inputHandler.IsAttacking)
+                Attack();
+
+            if (inputHandler.IsInteracting)
+                Interact();
+
+            if (jumpFromLedge)
             {
-                jumpFromLedge = false;
-                jumpFromLedgeTimer = 0f;
+                jumpFromLedgeTimer += Time.deltaTime;
+                if (jumpFromLedgeTimer > 1f)
+                {
+                    jumpFromLedge = false;
+                    jumpFromLedgeTimer = 0f;
+                }
             }
-        }
 
-        if (isGrabbed && !isLedge && !jumpFromLedge)
-        {
-            float vertical = inputHandler.MoveInput.y;
-            Vector2 newPosition = rb.position + Vector2.up * vertical * climbSpeed * Time.deltaTime;
-            float clampedY = Mathf.Clamp(newPosition.y, climbBounds.min.y, climbBounds.max.y);
-            rb.MovePosition(new Vector2(rb.position.x, clampedY));
+            if (isGrabbed && !isLedge && !jumpFromLedge)
+            {
+                float vertical = inputHandler.MoveInput.y;
+                Vector2 newPosition = rb.position + Vector2.up * vertical * climbSpeed * Time.deltaTime;
+                float clampedY = Mathf.Clamp(newPosition.y, climbBounds.min.y, climbBounds.max.y);
+                rb.MovePosition(new Vector2(rb.position.x, clampedY));
+            }
+            UpdateAnimator();
         }
-        UpdateAnimator();
     }
 
     private void FixedUpdate()
     {
         UpdateGrounded();
+        if (free)
+        {
+            if (!hasJumpedThisFrame)
+                HandleMovement();
+        }
 
-        if (!hasJumpedThisFrame)
-            HandleMovement();
 
         hasJumpedThisFrame = false;
     }
@@ -246,6 +255,12 @@ public class BigMonkeyController : MonoBehaviour
     {
         animator.SetTrigger("Punch");
     }
+
+    public void TriggerActionGame()
+    {
+
+    }
+
 
     private void OnDestroy()
     {

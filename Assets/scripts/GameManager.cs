@@ -14,10 +14,11 @@ public class GameManager : MonoBehaviour
 
     private GameObject largeMonkeyInstance;
     private GameObject smallMonkeyInstance;
-
+    private MinigameController minigameController;
     private void Start()
     {
         cam = FindAnyObjectByType<CameraController>();
+        minigameController = FindFirstObjectByType<MinigameController>();
 
         // Instantiate the large monkey
         largeMonkeyInstance = Instantiate(largeMonkeyPrefab, transform.position + new Vector3(-2, 0, 0), Quaternion.identity);
@@ -78,7 +79,7 @@ public class GameManager : MonoBehaviour
         var input = largeMonkeyInstance.GetComponent<PlayerInput>();
         input.SwitchCurrentControlScheme(controlScheme, device);
         input.ActivateInput();
-
+        minigameController.RegisterAs1Player(input.GetComponent<PlayerInputHandler>());
         usedDevices.Add(device);
         player1Assigned = true;
 
@@ -101,7 +102,7 @@ public class GameManager : MonoBehaviour
 
         input.SwitchCurrentControlScheme(controlScheme, new InputDevice[] { device });
         input.ActivateInput();
-
+        minigameController.RegisterAs2Player(input.GetComponent<PlayerInputHandler>());
         usedDevices.Add(device);
         player2Assigned = true;
 

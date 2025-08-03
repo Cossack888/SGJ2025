@@ -5,6 +5,7 @@ public class PlayerStatTracker : MonoBehaviour
 {
 
     public event Action LoseGame;
+    public event Action CaughtByNet;
     [SerializeField] private float playerMaxHealth;
     [SerializeField] private float playerCurrentHealth;
     [SerializeField] private int playerMaxAmmo;
@@ -54,7 +55,11 @@ public class PlayerStatTracker : MonoBehaviour
     public float PlayerSpeed
     {
         get { return playerSpeed; }
-        set { playerSpeed = value; }
+        set
+        {
+            playerSpeed = value;
+
+        }
     }
 
     public float ResetSpeed

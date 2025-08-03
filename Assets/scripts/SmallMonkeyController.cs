@@ -19,6 +19,7 @@ public class SmallMonkeyController : MonkeyControllerBase
     private bool isCharging;
     private float chargeStartTime;
     private Vector2 lastValidAimDirection = Vector2.right;
+    private bool free = true;
 
     protected override void Awake()
     {
@@ -27,31 +28,40 @@ public class SmallMonkeyController : MonkeyControllerBase
         inputHandler.AttackReleased += OnAttackRelease;
         inputHandler.Menu += MenuOpen;
         inputHandler.MenuClose += MenuClose;
+        inputHandler.ReleaseFromNet += SetFree;
     }
 
     private void Start()
     {
         lastValidAimDirection = facingRight ? Vector2.right : Vector2.left;
     }
-
+    public void SetFree(bool state)
+    {
+        free = state;
+    }
     protected override void Update()
     {
-        base.Update();
-
-        if (isCharging)
+        if (free)
         {
-            float heldTime = Mathf.Clamp(Time.time - chargeStartTime, 0f, maxChargeTime);
-            float currentForce = Mathf.Lerp(minThrowForce, maxThrowForce, heldTime / maxChargeTime);
+            base.Update();
 
-            Vector2 look = inputHandler.LookInput;
-            if (look.magnitude > 0.1f)
-                lastValidAimDirection = look.normalized;
+            if (isCharging)
+            {
+                float heldTime = Mathf.Clamp(Time.time - chargeStartTime, 0f, maxChargeTime);
+                float currentForce = Mathf.Lerp(minThrowForce, maxThrowForce, heldTime / maxChargeTime);
 
-            ShowTrajectory(lastValidAimDirection, currentForce);
+                Vector2 look = inputHandler.LookInput;
+                if (look.magnitude > 0.1f)
+                    lastValidAimDirection = look.normalized;
+
+                ShowTrajectory(lastValidAimDirection, currentForce);
+            }
+
+            if (inputHandler.IsInteracting)
+                Interact();
         }
 
-        if (inputHandler.IsInteracting)
-            Interact();
+
     }
 
     protected override void FixedUpdate()

@@ -189,6 +189,42 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PressA"",
+                    ""type"": ""Button"",
+                    ""id"": ""1a6108da-d450-4ef1-a616-c1c2f2284b6b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PressB"",
+                    ""type"": ""Button"",
+                    ""id"": ""d5b6fd94-02da-4d29-913a-00954f8f2b95"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PressX"",
+                    ""type"": ""Button"",
+                    ""id"": ""feee287b-be2a-4a42-ad35-ca9c20a458cc"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PressY"",
+                    ""type"": ""Button"",
+                    ""id"": ""95a51a6b-45f5-47f1-8fdd-01d1ce7b0eeb"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -640,6 +676,94 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Close"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""66f59546-965a-4689-bb4d-bbf526919232"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PressA"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ec90df21-921e-4778-95b2-b1782c9ce976"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PressA"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8b95c0d0-4600-411e-abc3-b75a0bd48d86"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PressB"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""830c0d18-515a-4491-8b1c-1115d61498e5"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PressB"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cc10c763-8cad-43de-9127-7bad5fe9a8b4"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PressX"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2e4339af-826f-454a-abe2-0d432d0182d4"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PressX"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c9d3c780-7746-440f-9822-6655c52307e1"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PressY"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a60f4e51-3dd6-4963-b36e-5bf4c85f625a"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PressY"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1218,6 +1342,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
         m_Player_Close = m_Player.FindAction("Close", throwIfNotFound: true);
+        m_Player_PressA = m_Player.FindAction("PressA", throwIfNotFound: true);
+        m_Player_PressB = m_Player.FindAction("PressB", throwIfNotFound: true);
+        m_Player_PressX = m_Player.FindAction("PressX", throwIfNotFound: true);
+        m_Player_PressY = m_Player.FindAction("PressY", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1321,6 +1449,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_Menu;
     private readonly InputAction m_Player_Close;
+    private readonly InputAction m_Player_PressA;
+    private readonly InputAction m_Player_PressB;
+    private readonly InputAction m_Player_PressX;
+    private readonly InputAction m_Player_PressY;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1376,6 +1508,22 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Close".
         /// </summary>
         public InputAction @Close => m_Wrapper.m_Player_Close;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/PressA".
+        /// </summary>
+        public InputAction @PressA => m_Wrapper.m_Player_PressA;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/PressB".
+        /// </summary>
+        public InputAction @PressB => m_Wrapper.m_Player_PressB;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/PressX".
+        /// </summary>
+        public InputAction @PressX => m_Wrapper.m_Player_PressX;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/PressY".
+        /// </summary>
+        public InputAction @PressY => m_Wrapper.m_Player_PressY;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1435,6 +1583,18 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Close.started += instance.OnClose;
             @Close.performed += instance.OnClose;
             @Close.canceled += instance.OnClose;
+            @PressA.started += instance.OnPressA;
+            @PressA.performed += instance.OnPressA;
+            @PressA.canceled += instance.OnPressA;
+            @PressB.started += instance.OnPressB;
+            @PressB.performed += instance.OnPressB;
+            @PressB.canceled += instance.OnPressB;
+            @PressX.started += instance.OnPressX;
+            @PressX.performed += instance.OnPressX;
+            @PressX.canceled += instance.OnPressX;
+            @PressY.started += instance.OnPressY;
+            @PressY.performed += instance.OnPressY;
+            @PressY.canceled += instance.OnPressY;
         }
 
         /// <summary>
@@ -1479,6 +1639,18 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Close.started -= instance.OnClose;
             @Close.performed -= instance.OnClose;
             @Close.canceled -= instance.OnClose;
+            @PressA.started -= instance.OnPressA;
+            @PressA.performed -= instance.OnPressA;
+            @PressA.canceled -= instance.OnPressA;
+            @PressB.started -= instance.OnPressB;
+            @PressB.performed -= instance.OnPressB;
+            @PressB.canceled -= instance.OnPressB;
+            @PressX.started -= instance.OnPressX;
+            @PressX.performed -= instance.OnPressX;
+            @PressX.canceled -= instance.OnPressX;
+            @PressY.started -= instance.OnPressY;
+            @PressY.performed -= instance.OnPressY;
+            @PressY.canceled -= instance.OnPressY;
         }
 
         /// <summary>
@@ -1845,6 +2017,34 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnClose(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "PressA" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPressA(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "PressB" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPressB(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "PressX" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPressX(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "PressY" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPressY(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

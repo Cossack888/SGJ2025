@@ -12,6 +12,7 @@ TagManager:
   - FireWall
   - Fist
   - Banana
+  - Net
   layers:
   - Default
   - TransparentFX

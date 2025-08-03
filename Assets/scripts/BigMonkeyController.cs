@@ -125,7 +125,7 @@ public class BigMonkeyController : MonoBehaviour
     private void Jump()
     {
         if (hasJumpedThisFrame) return;
-
+        if (!free) return;
         if (IsGrounded() || isGrabbed)
         {
             hasJumpedThisFrame = true;

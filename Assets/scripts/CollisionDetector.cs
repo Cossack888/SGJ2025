@@ -31,7 +31,7 @@ public class CollisionDetector : MonoBehaviour
             {
                 bigMonkeyController.SetFree(false);
                 smallMonkeyController.SetFree(false);
-
+                minigameController.ActivateGame();
             }
         }
     }

@@ -23,7 +23,7 @@ public class MinigameController : MonoBehaviour
     private Action pressA2, pressB2, pressX2, pressY2;
     private ButtonType currentPrompt;
     private int currentScore = 0;
-
+    public bool gameActive;
     private bool p1Pressed, p2Pressed;
 
     private void OnEnable()
@@ -43,6 +43,8 @@ public class MinigameController : MonoBehaviour
 
     public void ActivateGame()
     {
+        if (gameActive) { return; }
+        gameActive = true;
         UI.SetActive(true);
         RegisterEvents(player1);
         RegisterEvents(player2);
@@ -65,29 +67,32 @@ public class MinigameController : MonoBehaviour
 
     private void RegisterEvents(PlayerInputHandler input)
     {
-        if (input == player1)
+        if (input != null)
         {
-            pressA1 = () => OnButtonPressed(ButtonType.down, input);
-            pressB1 = () => OnButtonPressed(ButtonType.right, input);
-            pressX1 = () => OnButtonPressed(ButtonType.left, input);
-            pressY1 = () => OnButtonPressed(ButtonType.up, input);
+            if (input == player1)
+            {
+                pressA1 = () => OnButtonPressed(ButtonType.down, input);
+                pressB1 = () => OnButtonPressed(ButtonType.right, input);
+                pressX1 = () => OnButtonPressed(ButtonType.left, input);
+                pressY1 = () => OnButtonPressed(ButtonType.up, input);
 
-            input.PressA += pressA1;
-            input.PressB += pressB1;
-            input.PressX += pressX1;
-            input.PressY += pressY1;
-        }
-        else if (input == player2)
-        {
-            pressA2 = () => OnButtonPressed(ButtonType.down, input);
-            pressB2 = () => OnButtonPressed(ButtonType.right, input);
-            pressX2 = () => OnButtonPressed(ButtonType.left, input);
-            pressY2 = () => OnButtonPressed(ButtonType.up, input);
+                input.PressA += pressA1;
+                input.PressB += pressB1;
+                input.PressX += pressX1;
+                input.PressY += pressY1;
+            }
+            else if (input == player2)
+            {
+                pressA2 = () => OnButtonPressed(ButtonType.down, input);
+                pressB2 = () => OnButtonPressed(ButtonType.right, input);
+                pressX2 = () => OnButtonPressed(ButtonType.left, input);
+                pressY2 = () => OnButtonPressed(ButtonType.up, input);
 
-            input.PressA += pressA2;
-            input.PressB += pressB2;
-            input.PressX += pressX2;
-            input.PressY += pressY2;
+                input.PressA += pressA2;
+                input.PressB += pressB2;
+                input.PressX += pressX2;
+                input.PressY += pressY2;
+            }
         }
     }
 

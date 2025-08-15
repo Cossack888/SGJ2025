@@ -132,19 +132,19 @@ public class BigMonkeyController : MonoBehaviour
 
             float finalJumpForce = jumpForce;
 
-            // SprawdŸ k¹t pod postaci¹ tylko gdy jest na ziemi
+            // Sprawdï¿½ kï¿½t pod postaciï¿½ tylko gdy jest na ziemi
             /*if (IsGrounded())
             {
                 RaycastHit2D hit = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance + 0.1f, groundLayer);
                 if (hit.collider != null)
                 {
                     Vector2 normal = hit.normal;
-                    float angleFromUp = Vector2.Angle(normal, Vector2.up); // 0° = pion, 90° = poziom
+                    float angleFromUp = Vector2.Angle(normal, Vector2.up); // 0ï¿½ = pion, 90ï¿½ = poziom
 
                     if (angleFromUp > 10f)
                     {
                         finalJumpForce *= 1.7f; // Wzmocnij skok
-                        Debug.Log($"Skok wzmacniany: k¹t {angleFromUp:F1}°, nowa si³a: {finalJumpForce}");
+                        Debug.Log($"Skok wzmacniany: kï¿½t {angleFromUp:F1}ï¿½, nowa siï¿½a: {finalJumpForce}");
                     }
                 }
             }*/
